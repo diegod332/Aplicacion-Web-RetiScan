@@ -1,5 +1,4 @@
 
-  # High-Fidelity Landing Page Mockup
 
   This is a code bundle for High-Fidelity Landing Page Mockup. The original project is available at https://www.figma.com/design/sKEVwIRKWaX4fhVJNu8SQA/High-Fidelity-Landing-Page-Mockup.
 
