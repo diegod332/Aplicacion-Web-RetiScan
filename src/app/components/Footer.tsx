@@ -1,4 +1,5 @@
-import { Eye, Mail, MapPin, Phone, Shield, FileText } from 'lucide-react';
+import { Mail, Shield, FileText } from 'lucide-react';
+import logo from '../../assets/logo_sin_fondo.png';
 
 export function Footer() {
   return (
@@ -8,8 +9,8 @@ export function Footer() {
           {/* Brand */}
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <div className="bg-gradient-to-br from-cyan-500 to-blue-700 p-2 rounded-lg">
-                <Eye className="w-6 h-6 text-white" />
+              <div>
+                  <img src={logo} className="h-10 w-auto object-contain"/>
               </div>
               <span className="text-2xl font-semibold text-white">RetiScan</span>
             </div>
