@@ -51,57 +51,63 @@ const plans = [
 export function PricingSpanish() {
   const [isAnnual, setIsAnnual] = useState(false);
   const savingsPercentage = 20;
-  
+
   return (
-    <section id="suscripcion" className="relative py-24 bg-gradient-to-br from-white via-slate-50 to-blue-50/30">
+    <section
+      id="suscripcion"
+      className="relative py-24 text-white overflow-hidden"
+      style={{
+        background: 'linear-gradient(110deg, #001a4d 0%, #0044cc 25%, #00ccff 50%, #0044cc 75%, #001a4d 100%)',
+      }}
+    >
       {/* Subtle background pattern */}
-      <div className="absolute inset-0 opacity-[0.02]">
+      <div className="absolute inset-0 opacity-[0.05]">
         <div className="absolute inset-0" style={{
-          backgroundImage: `radial-gradient(circle at 2px 2px, rgb(30 58 138) 1px, transparent 0)`,
+          backgroundImage: `radial-gradient(circle at 2px 2px, white 1px, transparent 0)`,
           backgroundSize: '48px 48px'
         }}></div>
       </div>
-      
+
       <div className="relative max-w-7xl mx-auto px-6">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-block px-4 py-2 bg-blue-50 rounded-full mb-6">
-            <span className="text-sm font-semibold text-blue-700">MODELO DE NEGOCIO</span>
+          <div className="inline-block px-4 py-2 bg-white/10 border border-white/20 rounded-full mb-6">
+            <span className="text-sm font-semibold text-cyan-300">MODELO DE NEGOCIO</span>
           </div>
-          <h2 className="text-4xl lg:text-5xl font-bold text-slate-900 mb-6">
+          <h2 className="text-4xl lg:text-5xl font-bold text-white mb-6">
             Planes de Suscripción Transparentes
           </h2>
-          <p className="text-xl text-slate-600">
-            Modelos de suscripción flexibles diseñados para prácticas de todos los tamaños. 
+          <p className="text-xl text-white">
+            Modelos de suscripción flexibles diseñados para prácticas de todos los tamaños.
             Escala según creces con capacidades diagnósticas de nivel empresarial.
           </p>
         </div>
-        
+
         {/* Billing Toggle */}
         <div className="flex items-center justify-center gap-4 mb-12">
-          <span className={`text-lg font-medium transition-colors ${!isAnnual ? 'text-slate-900' : 'text-slate-500'}`}>
+          <span className={`text-lg font-medium transition-colors ${!isAnnual ? 'text-white' : 'text-white/70'}`}>
             Mensual
           </span>
-          
+
           <button
             onClick={() => setIsAnnual(!isAnnual)}
-            className="relative w-20 h-10 bg-gradient-to-r from-slate-300 to-slate-400 rounded-full transition-all duration-300 hover:shadow-lg"
+            className="relative w-20 h-10 rounded-full transition-all duration-300 hover:shadow-lg"
             style={{
-              background: isAnnual 
-                ? 'linear-gradient(to right, rgb(6 182 212), rgb(37 99 235))' 
-                : 'linear-gradient(to right, rgb(203 213 225), rgb(148 163 184))'
+              background: isAnnual
+                ? 'linear-gradient(to right, rgb(6 182 212), rgb(37 99 235))'
+                : 'linear-gradient(to right, rgba(255,255,255,0.3), rgba(255,255,255,0.4))'
             }}
           >
-            <div 
+            <div
               className="absolute top-1 left-1 w-8 h-8 bg-white rounded-full shadow-lg transition-transform duration-300"
               style={{
                 transform: isAnnual ? 'translateX(40px)' : 'translateX(0)'
               }}
             />
           </button>
-          
+
           <div className="flex items-center gap-2">
-            <span className={`text-lg font-medium transition-colors ${isAnnual ? 'text-slate-900' : 'text-slate-500'}`}>
+            <span className={`text-lg font-medium transition-colors ${isAnnual ? 'text-white' : 'text-white/70'}`}>
               Anual
             </span>
             <div className="px-3 py-1 bg-gradient-to-r from-green-500 to-emerald-600 rounded-full">
@@ -109,14 +115,14 @@ export function PricingSpanish() {
             </div>
           </div>
         </div>
-        
-        {/* Pricing Cards */}
+
+        {/* Pricing Cards — these stay white for contrast */}
         <div className="grid lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
           {plans.map((plan, index) => {
             const Icon = plan.icon;
             const price = isAnnual ? plan.annualPrice : plan.monthlyPrice;
             const savings = isAnnual ? (plan.monthlyPrice - plan.annualPrice) : 0;
-            
+
             return (
               <div
                 key={index}
@@ -131,19 +137,18 @@ export function PricingSpanish() {
                     </div>
                   </div>
                 )}
-                
-                <div 
-                  className={`relative h-full bg-white rounded-3xl border-2 transition-all duration-300 ${
-                    plan.popular 
-                      ? 'border-cyan-500 shadow-2xl shadow-cyan-500/20' 
-                      : 'border-slate-200 hover:border-slate-300 shadow-lg hover:shadow-xl'
-                  }`}
+
+                <div
+                  className={`relative h-full bg-white rounded-3xl border-2 transition-all duration-300 ${plan.popular
+                    ? 'border-cyan-500 shadow-2xl shadow-cyan-500/20'
+                    : 'border-white/50 shadow-lg hover:shadow-xl'
+                    }`}
                 >
                   {/* Glow effect for popular plan */}
                   {plan.popular && (
                     <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/20 to-blue-600/20 rounded-3xl blur-2xl -z-10"></div>
                   )}
-                  
+
                   <div className="p-8">
                     {/* Billing Badge */}
                     <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-slate-100 rounded-full mb-4">
@@ -154,7 +159,7 @@ export function PricingSpanish() {
                         </span>
                       )}
                     </div>
-                    
+
                     {/* Icon and Name */}
                     <div className="flex items-center gap-4 mb-4">
                       <div className={`w-14 h-14 bg-gradient-to-br ${plan.gradient} rounded-2xl flex items-center justify-center shadow-lg`}>
@@ -164,9 +169,9 @@ export function PricingSpanish() {
                         <h3 className="text-2xl font-bold text-slate-900">{plan.name}</h3>
                       </div>
                     </div>
-                    
+
                     <p className="text-slate-600 mb-6 min-h-[3rem]">{plan.description}</p>
-                    
+
                     {/* Price */}
                     <div className="mb-6">
                       <div className="flex items-end gap-2 mb-2">
@@ -192,18 +197,17 @@ export function PricingSpanish() {
                         </p>
                       )}
                     </div>
-                    
+
                     {/* CTA Button */}
-                    <button 
-                      className={`w-full py-4 rounded-xl font-semibold transition-all duration-300 mb-8 ${
-                        plan.popular
-                          ? 'bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white shadow-lg shadow-orange-500/30 hover:shadow-xl hover:shadow-orange-500/40'
-                          : 'bg-slate-900 hover:bg-slate-800 text-white'
-                      }`}
+                    <button
+                      className={`w-full py-4 rounded-xl font-semibold transition-all duration-300 mb-8 ${plan.popular
+                        ? 'bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white shadow-lg shadow-orange-500/30 hover:shadow-xl hover:shadow-orange-500/40'
+                        : 'bg-slate-900 hover:bg-slate-800 text-white'
+                        }`}
                     >
                       Iniciar Prueba Gratuita
                     </button>
-                    
+
                     {/* Features */}
                     <div className="space-y-4">
                       <div className="text-sm font-semibold text-slate-900 uppercase tracking-wide">
@@ -232,33 +236,33 @@ export function PricingSpanish() {
             );
           })}
         </div>
-        
+
         {/* Bottom info */}
         <div className="mt-16 text-center space-y-6">
-          <div className="flex flex-wrap justify-center gap-8 text-sm text-slate-600">
+          <div className="flex flex-wrap justify-center gap-8 text-sm text-white">
             <div className="flex items-center gap-2">
-              <Check className="w-5 h-5 text-green-600" />
+              <Check className="w-5 h-5 text-cyan-300" />
               <span>Prueba gratuita de 14 días en todos los planes</span>
             </div>
             <div className="flex items-center gap-2">
-              <Check className="w-5 h-5 text-green-600" />
+              <Check className="w-5 h-5 text-cyan-300" />
               <span>Cancela en cualquier momento, sin preguntas</span>
             </div>
             <div className="flex items-center gap-2">
-              <Check className="w-5 h-5 text-green-600" />
+              <Check className="w-5 h-5 text-cyan-300" />
               <span>Onboarding personalizado incluido</span>
             </div>
             <div className="flex items-center gap-2">
-              <Check className="w-5 h-5 text-green-600" />
+              <Check className="w-5 h-5 text-cyan-300" />
               <span>Cumplimiento HIPAA garantizado</span>
             </div>
           </div>
-          
+
           <div className="pt-8">
-            <p className="text-slate-600 mb-4">
+            <p className="text-white mb-4">
               ¿Necesitas una solución empresarial personalizada con infraestructura dedicada?
             </p>
-            <button className="px-8 py-3 bg-white hover:bg-slate-50 text-blue-900 border-2 border-slate-200 hover:border-blue-300 rounded-xl font-semibold transition-all duration-300">
+            <button className="px-8 py-3 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white border-2 border-white/30 hover:border-white/50 rounded-xl font-semibold transition-all duration-300">
               Contactar Ventas Empresariales
             </button>
           </div>

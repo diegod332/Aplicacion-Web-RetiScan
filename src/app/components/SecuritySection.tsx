@@ -32,41 +32,37 @@ const complianceBadges = [
 
 export function SecuritySection() {
   return (
-    <section id="seguridad" className="relative py-24 bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white overflow-hidden">
-      {/* Subtle pattern overlay */}
-      <div className="absolute inset-0 opacity-5">
+    <section id="seguridad" className="relative py-24 bg-gradient-to-br from-slate-50 to-white overflow-hidden">
+      {/* Subtle background pattern */}
+      <div className="absolute inset-0 opacity-[0.02]">
         <div className="absolute inset-0" style={{
-          backgroundImage: `radial-gradient(circle at 2px 2px, white 1px, transparent 0)`,
+          backgroundImage: `radial-gradient(circle at 2px 2px, rgb(30 58 138) 1px, transparent 0)`,
           backgroundSize: '48px 48px'
         }}></div>
       </div>
-      
-      {/* Gradient orbs */}
-      <div className="absolute top-0 right-1/4 w-[600px] h-[600px] bg-cyan-500/20 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-0 left-1/4 w-[500px] h-[500px] bg-blue-500/20 rounded-full blur-3xl"></div>
-      
+
       <div className="relative max-w-7xl mx-auto px-6">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-cyan-500/10 border border-cyan-500/20 rounded-full mb-6">
-            <Shield className="w-4 h-4 text-cyan-400" />
-            <span className="text-sm font-semibold text-cyan-400">SEGURIDAD Y CONFIANZA</span>
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 border border-blue-200 rounded-full mb-6">
+            <Shield className="w-4 h-4 text-blue-700" />
+            <span className="text-sm font-semibold text-blue-700">SEGURIDAD Y CONFIANZA</span>
           </div>
-          <h2 className="text-4xl lg:text-5xl font-bold mb-6">
+          <h2 className="text-4xl lg:text-5xl font-bold text-slate-900 mb-6">
             Seguridad de Nivel Empresarial para Datos Biométricos
           </h2>
-          <p className="text-xl text-slate-300">
-            Proteger la información sensible de salud del paciente es nuestra máxima prioridad. 
+          <p className="text-xl text-slate-700">
+            Proteger la información sensible de salud del paciente es nuestra máxima prioridad.
             RetiScan emplea protocolos de seguridad de grado militar y sigue los marcos de ciberseguridad NIST.
           </p>
         </div>
-        
+
         {/* Security Features Grid */}
         <div className="grid md:grid-cols-2 gap-8 mb-16">
           {securityFeatures.map((feature, index) => {
             const Icon = feature.icon;
             return (
-              <div key={index} className="group relative bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10 hover:bg-white/10 hover:border-cyan-500/30 transition-all duration-300">
+              <div key={index} className="group relative bg-white rounded-2xl p-8 border border-slate-200 hover:border-blue-300 hover:shadow-xl transition-all duration-300 shadow-lg">
                 <div className="flex items-start gap-4">
                   <div className="flex-shrink-0">
                     <div className="w-14 h-14 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
@@ -74,17 +70,17 @@ export function SecuritySection() {
                     </div>
                   </div>
                   <div>
-                    <h3 className="font-bold text-xl mb-3">{feature.title}</h3>
-                    <p className="text-slate-300 leading-relaxed">{feature.description}</p>
+                    <h3 className="font-bold text-xl text-slate-900 mb-3">{feature.title}</h3>
+                    <p className="text-slate-700 leading-relaxed">{feature.description}</p>
                   </div>
                 </div>
               </div>
             );
           })}
         </div>
-        
+
         {/* Threat Modeling Highlight */}
-        <div className="bg-gradient-to-br from-orange-500/10 to-red-500/10 border border-orange-500/20 rounded-2xl p-8 mb-16">
+        <div className="bg-gradient-to-br from-orange-50 to-red-50 border border-orange-200 rounded-2xl p-8 mb-16">
           <div className="flex items-start gap-6">
             <div className="flex-shrink-0">
               <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-red-600 rounded-2xl flex items-center justify-center shadow-lg">
@@ -92,54 +88,54 @@ export function SecuritySection() {
               </div>
             </div>
             <div className="flex-1">
-              <h3 className="text-2xl font-bold mb-4">Modelado Integral de Amenazas</h3>
-              <p className="text-slate-300 leading-relaxed mb-6">
-                Nuestra plataforma se somete a modelado de amenazas continuo utilizando la metodología STRIDE 
-                (Spoofing, Tampering, Repudiation, Information Disclosure, Denial of Service, 
+              <h3 className="text-2xl font-bold text-slate-900 mb-4">Modelado Integral de Amenazas</h3>
+              <p className="text-slate-700 leading-relaxed mb-6">
+                Nuestra plataforma se somete a modelado de amenazas continuo utilizando la metodología STRIDE
+                (Spoofing, Tampering, Repudiation, Information Disclosure, Denial of Service,
                 Elevation of Privilege). Cada componente ha sido analizado para detectar vulnerabilidades:
               </p>
               <div className="grid md:grid-cols-2 gap-4">
-                <div className="flex items-center gap-3 bg-white/5 rounded-lg p-3">
-                  <CheckCircle2 className="w-5 h-5 text-green-400 flex-shrink-0" />
-                  <span className="text-sm">Prevención de Inyección SQL vía Consultas Parametrizadas</span>
+                <div className="flex items-center gap-3 bg-white rounded-lg p-3 shadow-sm border border-slate-100">
+                  <CheckCircle2 className="w-5 h-5 text-green-600 flex-shrink-0" />
+                  <span className="text-sm text-slate-800">Prevención de Inyección SQL vía Consultas Parametrizadas</span>
                 </div>
-                <div className="flex items-center gap-3 bg-white/5 rounded-lg p-3">
-                  <CheckCircle2 className="w-5 h-5 text-green-400 flex-shrink-0" />
-                  <span className="text-sm">Validación y Sanitización de Entradas en Todos los Puntos</span>
+                <div className="flex items-center gap-3 bg-white rounded-lg p-3 shadow-sm border border-slate-100">
+                  <CheckCircle2 className="w-5 h-5 text-green-600 flex-shrink-0" />
+                  <span className="text-sm text-slate-800">Validación y Sanitización de Entradas en Todos los Puntos</span>
                 </div>
-                <div className="flex items-center gap-3 bg-white/5 rounded-lg p-3">
-                  <CheckCircle2 className="w-5 h-5 text-green-400 flex-shrink-0" />
-                  <span className="text-sm">Control de Acceso Basado en Roles (RBAC)</span>
+                <div className="flex items-center gap-3 bg-white rounded-lg p-3 shadow-sm border border-slate-100">
+                  <CheckCircle2 className="w-5 h-5 text-green-600 flex-shrink-0" />
+                  <span className="text-sm text-slate-800">Control de Acceso Basado en Roles (RBAC)</span>
                 </div>
-                <div className="flex items-center gap-3 bg-white/5 rounded-lg p-3">
-                  <CheckCircle2 className="w-5 h-5 text-green-400 flex-shrink-0" />
-                  <span className="text-sm">Verificaciones Criptográficas de Integridad en Todos los Datos</span>
+                <div className="flex items-center gap-3 bg-white rounded-lg p-3 shadow-sm border border-slate-100">
+                  <CheckCircle2 className="w-5 h-5 text-green-600 flex-shrink-0" />
+                  <span className="text-sm text-slate-800">Verificaciones Criptográficas de Integridad en Todos los Datos</span>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        
+
         {/* Compliance Badges */}
         <div className="text-center">
-          <h3 className="text-2xl font-bold mb-8">Certificado y Auditado</h3>
+          <h3 className="text-2xl font-bold text-slate-900 mb-8">Certificado y Auditado</h3>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
             {complianceBadges.map((badge, index) => (
-              <div key={index} className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
+              <div key={index} className="bg-white rounded-2xl p-6 border border-slate-200 shadow-lg">
                 <div className="w-12 h-12 bg-gradient-to-br from-green-400 to-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4">
                   <CheckCircle2 className="w-6 h-6 text-white" />
                 </div>
-                <div className="font-bold text-lg mb-1">{badge.name}</div>
-                <div className="text-sm text-green-400">{badge.status}</div>
+                <div className="font-bold text-lg text-slate-900 mb-1">{badge.name}</div>
+                <div className="text-sm text-green-600 font-medium">{badge.status}</div>
               </div>
             ))}
           </div>
         </div>
-        
+
         {/* Bottom Note */}
         <div className="mt-12 text-center">
-          <p className="text-slate-400 text-sm max-w-3xl mx-auto">
-            Todas las medidas de seguridad son verificadas independientemente mediante pruebas de penetración trimestrales 
+          <p className="text-slate-600 text-sm max-w-3xl mx-auto">
+            Todas las medidas de seguridad son verificadas independientemente mediante pruebas de penetración trimestrales
             por hackers éticos certificados y auditorías de seguridad anuales por firmas líderes en ciberseguridad.
           </p>
         </div>

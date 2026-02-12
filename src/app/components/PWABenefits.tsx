@@ -36,7 +36,13 @@ const benefits = [
 
 export function PWABenefits() {
   return (
-    <section id="beneficios" className="relative py-24 bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white overflow-hidden">
+    <section
+      id="beneficios"
+      className="relative py-24 text-white overflow-hidden"
+      style={{
+        background: 'linear-gradient(110deg, #001a4d 0%, #0044cc 25%, #00ccff 50%, #0044cc 75%, #001a4d 100%)',
+      }}
+    >
       {/* Subtle pattern overlay */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute inset-0" style={{
@@ -44,11 +50,11 @@ export function PWABenefits() {
           backgroundSize: '48px 48px'
         }}></div>
       </div>
-      
+
       {/* Gradient orbs */}
       <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-cyan-500/20 rounded-full blur-3xl"></div>
       <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-blue-500/20 rounded-full blur-3xl"></div>
-      
+
       <div className="relative max-w-7xl mx-auto px-6">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <div className="inline-block px-4 py-2 bg-cyan-500/10 border border-cyan-500/20 rounded-full mb-6">
@@ -57,11 +63,11 @@ export function PWABenefits() {
           <h2 className="text-4xl lg:text-5xl font-bold mb-6">
             Tecnología PWA al Servicio de la Salud
           </h2>
-          <p className="text-xl text-slate-300">
+          <p className="text-xl text-white">
             Experiencia de aplicación nativa con la flexibilidad de la web. Lo mejor de ambos mundos.
           </p>
         </div>
-        
+
         {/* Device Mockup Section */}
         <div className="mb-20">
           <div className="relative max-w-5xl mx-auto">
@@ -95,7 +101,7 @@ export function PWABenefits() {
                   </div>
                 </div>
               </div>
-              
+
               {/* Desktop mockup */}
               <div className="relative group">
                 <div className="absolute inset-0 bg-gradient-to-br from-blue-400/20 to-cyan-600/20 rounded-2xl blur-2xl group-hover:blur-3xl transition-all"></div>
@@ -134,7 +140,7 @@ export function PWABenefits() {
                 </div>
               </div>
             </div>
-            
+
             {/* Seamless badge */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
               <div className="bg-gradient-to-r from-orange-500 to-orange-600 px-6 py-3 rounded-full shadow-2xl border-4 border-white">
@@ -143,7 +149,7 @@ export function PWABenefits() {
             </div>
           </div>
         </div>
-        
+
         {/* Benefits Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {benefits.map((benefit, index) => {
@@ -158,7 +164,7 @@ export function PWABenefits() {
                   </div>
                   <div>
                     <h3 className="font-bold text-lg mb-2">{benefit.title}</h3>
-                    <p className="text-slate-300 text-sm leading-relaxed">{benefit.description}</p>
+                    <p className="text-white text-sm leading-relaxed">{benefit.description}</p>
                   </div>
                 </div>
               </div>
