@@ -1,4 +1,7 @@
 import { Shield, Lock, Database, FileCheck, AlertTriangle, CheckCircle2 } from 'lucide-react';
+import { useScrollReveal } from '@/hooks/useScrollReveal';
+import { SplitText } from '@/app/components/SplitText';
+import { GlowCard } from '@/app/components/GlowCard';
 
 const securityFeatures = [
   {
@@ -31,6 +34,15 @@ const complianceBadges = [
 ];
 
 export function SecuritySection() {
+  const title = useScrollReveal('fade-up');
+  const c0 = useScrollReveal('fade-up', { delay: 100 });
+  const c1 = useScrollReveal('fade-up', { delay: 250 });
+  const c2 = useScrollReveal('fade-up', { delay: 400 });
+  const c3 = useScrollReveal('fade-up', { delay: 550 });
+  const cardReveals = [c0, c1, c2, c3];
+  const threat = useScrollReveal('zoom-in', { delay: 200 });
+  const badges = useScrollReveal('fade-up', { delay: 300 });
+
   return (
     <section id="seguridad" className="relative py-24 bg-gradient-to-br from-slate-50 to-white overflow-hidden">
       {/* Subtle background pattern */}
@@ -43,14 +55,14 @@ export function SecuritySection() {
 
       <div className="relative max-w-7xl mx-auto px-6">
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div ref={title.ref} style={title.style} className="text-center max-w-3xl mx-auto mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 border border-blue-200 rounded-full mb-6">
             <Shield className="w-4 h-4 text-blue-700" />
             <span className="text-sm font-semibold text-blue-700">SEGURIDAD Y CONFIANZA</span>
           </div>
-          <h2 className="text-4xl lg:text-5xl font-bold text-slate-900 mb-6">
+          <SplitText as="h2" className="text-4xl lg:text-5xl font-bold text-slate-900 mb-6">
             Seguridad de Nivel Empresarial para Datos Biométricos
-          </h2>
+          </SplitText>
           <p className="text-xl text-slate-700">
             Proteger la información sensible de salud del paciente es nuestra máxima prioridad.
             RetiScan emplea protocolos de seguridad de grado militar y sigue los marcos de ciberseguridad NIST.
@@ -61,26 +73,29 @@ export function SecuritySection() {
         <div className="grid md:grid-cols-2 gap-8 mb-16">
           {securityFeatures.map((feature, index) => {
             const Icon = feature.icon;
+            const reveal = cardReveals[index];
             return (
-              <div key={index} className="group relative bg-white rounded-2xl p-8 border border-slate-200 hover:border-blue-300 hover:shadow-xl transition-all duration-300 shadow-lg">
-                <div className="flex items-start gap-4">
-                  <div className="flex-shrink-0">
-                    <div className="w-14 h-14 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
-                      <Icon className="w-7 h-7 text-white" />
+              <div key={index} ref={reveal.ref} style={reveal.style} className="group">
+                <GlowCard glowColor="rgba(0, 204, 255, 0.12)" className="bg-white rounded-2xl p-8 border border-slate-200 hover:border-blue-300 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 shadow-lg cursor-default">
+                  <div className="flex items-start gap-4">
+                    <div className="flex-shrink-0">
+                      <div className="w-14 h-14 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">
+                        <Icon className="w-7 h-7 text-white" />
+                      </div>
+                    </div>
+                    <div>
+                      <h3 className="font-bold text-xl text-slate-900 mb-3">{feature.title}</h3>
+                      <p className="text-slate-700 leading-relaxed">{feature.description}</p>
                     </div>
                   </div>
-                  <div>
-                    <h3 className="font-bold text-xl text-slate-900 mb-3">{feature.title}</h3>
-                    <p className="text-slate-700 leading-relaxed">{feature.description}</p>
-                  </div>
-                </div>
+                </GlowCard>
               </div>
             );
           })}
         </div>
 
         {/* Threat Modeling Highlight */}
-        <div className="bg-gradient-to-br from-orange-50 to-red-50 border border-orange-200 rounded-2xl p-8 mb-16">
+        <div ref={threat.ref} style={threat.style} className="bg-gradient-to-br from-orange-50 to-red-50 border border-orange-200 rounded-2xl p-8 mb-16 hover:shadow-xl transition-shadow duration-300">
           <div className="flex items-start gap-6">
             <div className="flex-shrink-0">
               <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-red-600 rounded-2xl flex items-center justify-center shadow-lg">
@@ -95,34 +110,29 @@ export function SecuritySection() {
                 Elevation of Privilege). Cada componente ha sido analizado para detectar vulnerabilidades:
               </p>
               <div className="grid md:grid-cols-2 gap-4">
-                <div className="flex items-center gap-3 bg-white rounded-lg p-3 shadow-sm border border-slate-100">
-                  <CheckCircle2 className="w-5 h-5 text-green-600 flex-shrink-0" />
-                  <span className="text-sm text-slate-800">Prevención de Inyección SQL vía Consultas Parametrizadas</span>
-                </div>
-                <div className="flex items-center gap-3 bg-white rounded-lg p-3 shadow-sm border border-slate-100">
-                  <CheckCircle2 className="w-5 h-5 text-green-600 flex-shrink-0" />
-                  <span className="text-sm text-slate-800">Validación y Sanitización de Entradas en Todos los Puntos</span>
-                </div>
-                <div className="flex items-center gap-3 bg-white rounded-lg p-3 shadow-sm border border-slate-100">
-                  <CheckCircle2 className="w-5 h-5 text-green-600 flex-shrink-0" />
-                  <span className="text-sm text-slate-800">Control de Acceso Basado en Roles (RBAC)</span>
-                </div>
-                <div className="flex items-center gap-3 bg-white rounded-lg p-3 shadow-sm border border-slate-100">
-                  <CheckCircle2 className="w-5 h-5 text-green-600 flex-shrink-0" />
-                  <span className="text-sm text-slate-800">Verificaciones Criptográficas de Integridad en Todos los Datos</span>
-                </div>
+                {[
+                  'Prevención de Inyección SQL vía Consultas Parametrizadas',
+                  'Validación y Sanitización de Entradas en Todos los Puntos',
+                  'Control de Acceso Basado en Roles (RBAC)',
+                  'Verificaciones Criptográficas de Integridad en Todos los Datos'
+                ].map((item, i) => (
+                  <div key={i} className="flex items-center gap-3 bg-white rounded-lg p-3 shadow-sm border border-slate-100 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300">
+                    <CheckCircle2 className="w-5 h-5 text-green-600 flex-shrink-0" />
+                    <span className="text-sm text-slate-800">{item}</span>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
         </div>
 
         {/* Compliance Badges */}
-        <div className="text-center">
+        <div ref={badges.ref} style={badges.style} className="text-center">
           <h3 className="text-2xl font-bold text-slate-900 mb-8">Certificado y Auditado</h3>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
             {complianceBadges.map((badge, index) => (
-              <div key={index} className="bg-white rounded-2xl p-6 border border-slate-200 shadow-lg">
-                <div className="w-12 h-12 bg-gradient-to-br from-green-400 to-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4">
+              <div key={index} className="bg-white rounded-2xl p-6 border border-slate-200 shadow-lg hover:shadow-xl hover:-translate-y-2 hover:border-green-300 transition-all duration-500 group cursor-default">
+                <div className="w-12 h-12 bg-gradient-to-br from-green-400 to-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
                   <CheckCircle2 className="w-6 h-6 text-white" />
                 </div>
                 <div className="font-bold text-lg text-slate-900 mb-1">{badge.name}</div>

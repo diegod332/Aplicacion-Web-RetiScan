@@ -1,31 +1,46 @@
 import { Award, Users, LineChart, Shield } from 'lucide-react';
 import { ImageWithFallback } from '@/app/components/figma/ImageWithFallback';
-
-const stats = [
-  { icon: Users, value: '50K+', label: 'Pacientes Analizados' },
-  { icon: Award, value: '94.7%', label: 'Precisión del Modelo' },
-  { icon: LineChart, value: '98%', label: 'Satisfacción de Usuarios' },
-  { icon: Shield, value: 'HIPAA', label: 'Certificado de Seguridad' }
-];
+import { useScrollReveal } from '@/hooks/useScrollReveal';
+import { useCountUp } from '@/hooks/useCountUp';
+import { SplitText } from '@/app/components/SplitText';
 
 export function TrustSection() {
+  const image = useScrollReveal('fade-right', { delay: 100 });
+  const content = useScrollReveal('fade-left', { delay: 200 });
+  const s0 = useScrollReveal('zoom-in', { delay: 300 });
+  const s1 = useScrollReveal('zoom-in', { delay: 450 });
+  const s2 = useScrollReveal('zoom-in', { delay: 600 });
+  const s3 = useScrollReveal('zoom-in', { delay: 750 });
+  const statReveals = [s0, s1, s2, s3];
+
+  const patients = useCountUp(50, { suffix: 'K+', duration: 1800 });
+  const accuracy = useCountUp(94.7, { decimals: 1, suffix: '%', duration: 2200 });
+  const satisfaction = useCountUp(98, { suffix: '%', duration: 2000 });
+
+  const stats = [
+    { icon: Users, displayValue: patients.display, displayRef: patients.ref, label: 'Pacientes Analizados' },
+    { icon: Award, displayValue: accuracy.display, displayRef: accuracy.ref, label: 'Precisión del Modelo' },
+    { icon: LineChart, displayValue: satisfaction.display, displayRef: satisfaction.ref, label: 'Satisfacción de Usuarios' },
+    { icon: Shield, displayValue: 'HIPAA', displayRef: null, label: 'Certificado de Seguridad' }
+  ];
+
   return (
     <section className="relative py-24 bg-gradient-to-br from-slate-50 to-white">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Left - Image */}
-          <div className="relative order-2 lg:order-1">
+          <div ref={image.ref} style={image.style} className="relative order-2 lg:order-1">
             <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/20 to-blue-600/20 rounded-3xl blur-2xl"></div>
-            <div className="relative rounded-3xl overflow-hidden shadow-2xl">
-              <ImageWithFallback 
+            <div className="relative rounded-3xl overflow-hidden shadow-2xl hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.25)] transition-shadow duration-500">
+              <ImageWithFallback
                 src="https://images.unsplash.com/photo-1758691463626-0ab959babe00?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkb2N0b3IlMjBtZWRpY2FsJTIwdGVjaG5vbG9neXxlbnwxfHx8fDE3NjkzMTIxNTZ8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
                 alt="Profesional médico usando RetiScan"
                 className="w-full h-auto"
               />
             </div>
-            
+
             {/* Floating credential badge */}
-            <div className="absolute -bottom-6 -right-6 bg-white rounded-2xl shadow-2xl p-6 border border-slate-200">
+            <div className="absolute -bottom-6 -right-6 bg-white rounded-2xl shadow-2xl p-6 border border-slate-200 hover:scale-105 hover:shadow-[0_20px_40px_-10px_rgba(0,0,0,0.15)] transition-all duration-300">
               <div className="flex items-center gap-4">
                 <div className="w-16 h-16 bg-gradient-to-br from-green-400 to-emerald-600 rounded-2xl flex items-center justify-center">
                   <Award className="w-8 h-8 text-white" />
@@ -37,35 +52,41 @@ export function TrustSection() {
               </div>
             </div>
           </div>
-          
+
           {/* Right - Content */}
           <div className="space-y-8 order-1 lg:order-2">
-            <div>
+            <div ref={content.ref} style={content.style}>
               <div className="inline-block px-4 py-2 bg-blue-50 rounded-full mb-6">
                 <span className="text-sm font-semibold text-blue-700">CONFIANZA MÉDICA</span>
               </div>
-              <h2 className="text-4xl lg:text-5xl font-bold text-slate-900 mb-6">
+              <SplitText as="h2" className="text-4xl lg:text-5xl font-bold text-slate-900 mb-6">
                 Respaldado por Profesionales de la Salud
-              </h2>
+              </SplitText>
               <p className="text-xl text-slate-600 leading-relaxed mb-6">
-                RetiScan ha sido desarrollado en colaboración con oftalmólogos líderes 
+                RetiScan ha sido desarrollado en colaboración con oftalmólogos líderes
                 y entrenado con millones de imágenes retinales validadas clínicamente.
               </p>
               <p className="text-lg text-slate-600 leading-relaxed">
-                Nuestra tecnología de inteligencia artificial ha demostrado resultados 
-                comparables a especialistas en la detección temprana de retinopatía diabética, 
+                Nuestra tecnología de inteligencia artificial ha demostrado resultados
+                comparables a especialistas en la detección temprana de retinopatía diabética,
                 ayudando a prevenir la pérdida de visión en miles de pacientes.
               </p>
             </div>
-            
+
             {/* Stats grid */}
             <div className="grid grid-cols-2 gap-6 pt-4">
               {stats.map((stat, index) => {
                 const Icon = stat.icon;
+                const reveal = statReveals[index];
                 return (
-                  <div key={index} className="bg-gradient-to-br from-white to-slate-50 rounded-2xl p-6 border border-slate-200 shadow-lg">
-                    <Icon className="w-8 h-8 text-cyan-600 mb-3" />
-                    <div className="text-3xl font-bold text-slate-900 mb-1">{stat.value}</div>
+                  <div key={index} ref={reveal.ref} style={reveal.style} className="bg-gradient-to-br from-white to-slate-50 rounded-2xl p-6 border border-slate-200 shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group">
+                    <Icon className="w-8 h-8 text-cyan-600 mb-3 group-hover:scale-110 transition-transform duration-300" />
+                    <div
+                      ref={stat.displayRef as React.RefObject<HTMLDivElement> | null}
+                      className="text-3xl font-bold text-slate-900 mb-1 tabular-nums"
+                    >
+                      {stat.displayValue}
+                    </div>
                     <div className="text-sm text-slate-600">{stat.label}</div>
                   </div>
                 );

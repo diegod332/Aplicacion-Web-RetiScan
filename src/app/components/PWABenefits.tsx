@@ -1,5 +1,6 @@
 import { Download, RefreshCw, Wifi, Zap, Shield, Globe } from 'lucide-react';
-import { ImageWithFallback } from '@/app/components/figma/ImageWithFallback';
+import { useScrollReveal } from '@/hooks/useScrollReveal';
+import { SplitText } from '@/app/components/SplitText';
 
 const benefits = [
   {
@@ -35,12 +36,23 @@ const benefits = [
 ];
 
 export function PWABenefits() {
+  const title = useScrollReveal('fade-up');
+  const mockups = useScrollReveal('zoom-in', { delay: 200 });
+  const b0 = useScrollReveal('fade-up', { delay: 100 });
+  const b1 = useScrollReveal('fade-up', { delay: 200 });
+  const b2 = useScrollReveal('fade-up', { delay: 300 });
+  const b3 = useScrollReveal('fade-up', { delay: 400 });
+  const b4 = useScrollReveal('fade-up', { delay: 500 });
+  const b5 = useScrollReveal('fade-up', { delay: 600 });
+  const benefitReveals = [b0, b1, b2, b3, b4, b5];
+
   return (
     <section
       id="beneficios"
-      className="relative py-24 text-white overflow-hidden"
+      className="relative py-24 text-white overflow-hidden noise-overlay animated-gradient"
       style={{
         background: 'linear-gradient(110deg, #001a4d 0%, #0044cc 25%, #00ccff 50%, #0044cc 75%, #001a4d 100%)',
+        backgroundSize: '300% 300%',
       }}
     >
       {/* Subtle pattern overlay */}
@@ -56,32 +68,30 @@ export function PWABenefits() {
       <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-blue-500/20 rounded-full blur-3xl"></div>
 
       <div className="relative max-w-7xl mx-auto px-6">
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div ref={title.ref} style={title.style} className="text-center max-w-3xl mx-auto mb-16">
           <div className="inline-block px-4 py-2 bg-cyan-500/10 border border-cyan-500/20 rounded-full mb-6">
             <span className="text-sm font-semibold text-cyan-400">PROGRESSIVE WEB APP</span>
           </div>
-          <h2 className="text-4xl lg:text-5xl font-bold mb-6">
+          <SplitText as="h2" className="text-4xl lg:text-5xl font-bold mb-6">
             Tecnología PWA al Servicio de la Salud
-          </h2>
+          </SplitText>
           <p className="text-xl text-white">
             Experiencia de aplicación nativa con la flexibilidad de la web. Lo mejor de ambos mundos.
           </p>
         </div>
 
         {/* Device Mockup Section */}
-        <div className="mb-20">
+        <div ref={mockups.ref} style={mockups.style} className="mb-20">
           <div className="relative max-w-5xl mx-auto">
             <div className="grid md:grid-cols-2 gap-8 items-center">
               {/* Mobile mockup */}
               <div className="relative group">
                 <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/20 to-blue-600/20 rounded-3xl blur-2xl group-hover:blur-3xl transition-all"></div>
-                <div className="relative bg-slate-800 rounded-[3rem] p-3 border-8 border-slate-700 shadow-2xl">
+                <div className="relative bg-slate-800 rounded-[3rem] p-3 border-8 border-slate-700 shadow-2xl group-hover:shadow-[0_30px_60px_-15px_rgba(0,204,255,0.2)] transition-shadow duration-500">
                   <div className="bg-slate-900 rounded-[2.3rem] overflow-hidden">
-                    {/* Phone notch */}
                     <div className="h-6 bg-slate-900 flex items-center justify-center">
                       <div className="w-32 h-4 bg-slate-800 rounded-full"></div>
                     </div>
-                    {/* Phone screen */}
                     <div className="bg-gradient-to-br from-slate-50 to-slate-100 p-6 min-h-[500px]">
                       <div className="space-y-4">
                         <div className="h-12 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-xl flex items-center justify-center text-white font-bold">
@@ -105,9 +115,8 @@ export function PWABenefits() {
               {/* Desktop mockup */}
               <div className="relative group">
                 <div className="absolute inset-0 bg-gradient-to-br from-blue-400/20 to-cyan-600/20 rounded-2xl blur-2xl group-hover:blur-3xl transition-all"></div>
-                <div className="relative bg-slate-800 rounded-2xl p-2 border-4 border-slate-700 shadow-2xl">
+                <div className="relative bg-slate-800 rounded-2xl p-2 border-4 border-slate-700 shadow-2xl group-hover:shadow-[0_30px_60px_-15px_rgba(0,204,255,0.2)] transition-shadow duration-500">
                   <div className="bg-slate-900 rounded-xl overflow-hidden">
-                    {/* Browser bar */}
                     <div className="h-8 bg-slate-800 flex items-center px-3 gap-2 border-b border-slate-700">
                       <div className="flex gap-1.5">
                         <div className="w-2.5 h-2.5 rounded-full bg-red-500"></div>
@@ -118,7 +127,6 @@ export function PWABenefits() {
                         retiscan.app
                       </div>
                     </div>
-                    {/* Desktop screen */}
                     <div className="bg-gradient-to-br from-slate-50 to-slate-100 p-8 min-h-[400px]">
                       <div className="space-y-4">
                         <div className="h-16 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-xl flex items-center px-6 text-white font-bold text-xl shadow-lg">
@@ -143,7 +151,7 @@ export function PWABenefits() {
 
             {/* Seamless badge */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
-              <div className="bg-gradient-to-r from-orange-500 to-orange-600 px-6 py-3 rounded-full shadow-2xl border-4 border-white">
+              <div className="bg-gradient-to-r from-orange-500 to-orange-600 px-6 py-3 rounded-full shadow-2xl border-4 border-white hover:scale-110 transition-transform duration-300">
                 <span className="font-bold text-white">Experiencia Perfecta</span>
               </div>
             </div>
@@ -154,11 +162,12 @@ export function PWABenefits() {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {benefits.map((benefit, index) => {
             const Icon = benefit.icon;
+            const reveal = benefitReveals[index];
             return (
-              <div key={index} className="group relative bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-300">
+              <div key={index} ref={reveal.ref} style={reveal.style} className="group relative bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:bg-white/10 hover:border-white/20 hover:-translate-y-2 hover:shadow-[0_20px_40px_-15px_rgba(0,204,255,0.2)] transition-all duration-500 cursor-default">
                 <div className="flex items-start gap-4">
                   <div className="flex-shrink-0">
-                    <div className="w-12 h-12 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                    <div className="w-12 h-12 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">
                       <Icon className="w-6 h-6 text-white" />
                     </div>
                   </div>

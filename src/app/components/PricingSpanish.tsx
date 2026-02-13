@@ -1,5 +1,7 @@
 import { Check, X, Zap, Building, Sparkles } from 'lucide-react';
 import { useState } from 'react';
+import { useScrollReveal } from '@/hooks/useScrollReveal';
+import { SplitText } from '@/app/components/SplitText';
 
 const plans = [
   {
@@ -52,12 +54,19 @@ export function PricingSpanish() {
   const [isAnnual, setIsAnnual] = useState(false);
   const savingsPercentage = 20;
 
+  const title = useScrollReveal('fade-up');
+  const toggle = useScrollReveal('fade-up', { delay: 200 });
+  const cardLeft = useScrollReveal('fade-right', { delay: 300 });
+  const cardRight = useScrollReveal('fade-left', { delay: 500 });
+  const bottomInfo = useScrollReveal('fade-up', { delay: 300 });
+
   return (
     <section
       id="suscripcion"
-      className="relative py-24 text-white overflow-hidden"
+      className="relative py-24 text-white overflow-hidden noise-overlay animated-gradient"
       style={{
         background: 'linear-gradient(110deg, #001a4d 0%, #0044cc 25%, #00ccff 50%, #0044cc 75%, #001a4d 100%)',
+        backgroundSize: '300% 300%',
       }}
     >
       {/* Subtle background pattern */}
@@ -70,13 +79,13 @@ export function PricingSpanish() {
 
       <div className="relative max-w-7xl mx-auto px-6">
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div ref={title.ref} style={title.style} className="text-center max-w-3xl mx-auto mb-16">
           <div className="inline-block px-4 py-2 bg-white/10 border border-white/20 rounded-full mb-6">
             <span className="text-sm font-semibold text-cyan-300">MODELO DE NEGOCIO</span>
           </div>
-          <h2 className="text-4xl lg:text-5xl font-bold text-white mb-6">
+          <SplitText as="h2" className="text-4xl lg:text-5xl font-bold text-white mb-6">
             Planes de Suscripción Transparentes
-          </h2>
+          </SplitText>
           <p className="text-xl text-white">
             Modelos de suscripción flexibles diseñados para prácticas de todos los tamaños.
             Escala según creces con capacidades diagnósticas de nivel empresarial.
@@ -84,7 +93,7 @@ export function PricingSpanish() {
         </div>
 
         {/* Billing Toggle */}
-        <div className="flex items-center justify-center gap-4 mb-12">
+        <div ref={toggle.ref} style={toggle.style} className="flex items-center justify-center gap-4 mb-12">
           <span className={`text-lg font-medium transition-colors ${!isAnnual ? 'text-white' : 'text-white/70'}`}>
             Mensual
           </span>
@@ -126,6 +135,8 @@ export function PricingSpanish() {
             return (
               <div
                 key={index}
+                ref={index === 0 ? cardLeft.ref : cardRight.ref}
+                style={index === 0 ? cardLeft.style : cardRight.style}
                 className={`relative group ${plan.popular ? 'lg:-mt-8' : ''}`}
               >
                 {/* Popular badge */}
@@ -139,9 +150,9 @@ export function PricingSpanish() {
                 )}
 
                 <div
-                  className={`relative h-full bg-white rounded-3xl border-2 transition-all duration-300 ${plan.popular
-                    ? 'border-cyan-500 shadow-2xl shadow-cyan-500/20'
-                    : 'border-white/50 shadow-lg hover:shadow-xl'
+                  className={`relative h-full bg-white rounded-3xl border-2 transition-all duration-500 hover:-translate-y-2 ${plan.popular
+                    ? 'border-cyan-500 shadow-2xl shadow-cyan-500/20 hover:shadow-[0_30px_60px_-15px_rgba(0,204,255,0.3)]'
+                    : 'border-white/50 shadow-lg hover:shadow-2xl'
                     }`}
                 >
                   {/* Glow effect for popular plan */}
@@ -200,9 +211,9 @@ export function PricingSpanish() {
 
                     {/* CTA Button */}
                     <button
-                      className={`w-full py-4 rounded-xl font-semibold transition-all duration-300 mb-8 ${plan.popular
+                      className={`w-full py-4 rounded-xl font-semibold transition-all duration-300 mb-8 hover:-translate-y-0.5 active:translate-y-0 ${plan.popular
                         ? 'bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white shadow-lg shadow-orange-500/30 hover:shadow-xl hover:shadow-orange-500/40'
-                        : 'bg-slate-900 hover:bg-slate-800 text-white'
+                        : 'bg-slate-900 hover:bg-slate-800 text-white hover:shadow-lg'
                         }`}
                     >
                       Iniciar Prueba Gratuita
@@ -238,7 +249,7 @@ export function PricingSpanish() {
         </div>
 
         {/* Bottom info */}
-        <div className="mt-16 text-center space-y-6">
+        <div ref={bottomInfo.ref} style={bottomInfo.style} className="mt-16 text-center space-y-6">
           <div className="flex flex-wrap justify-center gap-8 text-sm text-white">
             <div className="flex items-center gap-2">
               <Check className="w-5 h-5 text-cyan-300" />
@@ -262,7 +273,7 @@ export function PricingSpanish() {
             <p className="text-white mb-4">
               ¿Necesitas una solución empresarial personalizada con infraestructura dedicada?
             </p>
-            <button className="px-8 py-3 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white border-2 border-white/30 hover:border-white/50 rounded-xl font-semibold transition-all duration-300">
+            <button className="px-8 py-3 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white border-2 border-white/30 hover:border-white/50 rounded-xl font-semibold hover:-translate-y-1 active:translate-y-0 transition-all duration-300">
               Contactar Ventas Empresariales
             </button>
           </div>

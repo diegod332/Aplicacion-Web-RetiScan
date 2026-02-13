@@ -1,36 +1,67 @@
 import { Smartphone, Cloud, Wifi, Zap, Shield, Activity } from 'lucide-react';
+import { useScrollReveal } from '@/hooks/useScrollReveal';
+import { SplitText } from '@/app/components/SplitText';
 
 export function ProductShowcase() {
+  const title = useScrollReveal('fade-up');
+  const phone = useScrollReveal('fade-right', { delay: 200 });
+  const features = useScrollReveal('fade-left', { delay: 300 });
+  const feat0 = useScrollReveal('fade-left', { delay: 400 });
+  const feat1 = useScrollReveal('fade-left', { delay: 600 });
+  const feat2 = useScrollReveal('fade-left', { delay: 800 });
+  const featReveals = [feat0, feat1, feat2];
+
+  const featureItems = [
+    {
+      icon: Smartphone,
+      gradient: 'from-cyan-500 to-blue-600',
+      title: 'Accesibilidad Multiplataforma',
+      desc: 'Despliega en smartphones, tablets y estaciones de trabajo. Una plataforma, dispositivos ilimitados. Perfecto para unidades móviles y prácticas multilocalización.',
+    },
+    {
+      icon: Zap,
+      gradient: 'from-blue-600 to-blue-700',
+      title: 'Análisis por Aprendizaje Profundo en Tiempo Real',
+      desc: 'Nuestra red neuronal convolucional procesa imágenes retinales en menos de 2 minutos, identificando microaneurismas, hemorragias y exudados con 94.7% de precisión.',
+    },
+    {
+      icon: Shield,
+      gradient: 'from-orange-500 to-orange-600',
+      title: 'Infraestructura Cloud Conforme a HIPAA',
+      desc: 'Almacenamiento seguro de expedientes clínicos con cifrado end-to-end, respaldos automáticos y registros de auditoría completos. Todos los centros de datos certificados SOC 2 Type II.',
+    },
+  ];
+
   return (
     <section id="producto" className="relative py-24 bg-white">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div ref={title.ref} style={title.style} className="text-center max-w-3xl mx-auto mb-16">
           <div className="inline-block px-4 py-2 bg-cyan-50 rounded-full mb-6">
             <span className="text-sm font-semibold text-cyan-700">EL PRODUCTO</span>
           </div>
-          <h2 className="text-4xl lg:text-5xl font-bold text-slate-900 mb-6">
+          <SplitText as="h2" className="text-4xl lg:text-5xl font-bold text-slate-900 mb-6">
             La Potencia de la PWA de RetiScan
-          </h2>
+          </SplitText>
           <p className="text-xl text-slate-600">
-            Una plataforma diagnóstica basada en la nube que transforma cualquier dispositivo 
+            Una plataforma diagnóstica basada en la nube que transforma cualquier dispositivo
             en una estación profesional de screening de retinopatía. Despliega al instante, escala sin esfuerzo.
           </p>
         </div>
-        
+
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Left - Mobile App Mockup */}
-          <div className="relative">
+          <div ref={phone.ref} style={phone.style} className="relative">
             <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/20 to-blue-600/20 rounded-3xl blur-3xl"></div>
-            
+
             {/* Phone Frame */}
             <div className="relative max-w-sm mx-auto">
-              <div className="bg-slate-900 rounded-[3.5rem] p-4 shadow-2xl border-8 border-slate-800">
+              <div className="bg-slate-900 rounded-[3.5rem] p-4 shadow-2xl border-8 border-slate-800 hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.3)] transition-shadow duration-500">
                 <div className="bg-white rounded-[2.8rem] overflow-hidden">
                   {/* Status Bar */}
                   <div className="bg-slate-900 h-8 flex items-center justify-center">
                     <div className="w-32 h-5 bg-slate-800 rounded-full"></div>
                   </div>
-                  
+
                   {/* App Content */}
                   <div className="bg-gradient-to-br from-slate-50 to-white">
                     {/* App Header */}
@@ -47,7 +78,7 @@ export function ProductShowcase() {
                         </div>
                         <div className="w-10 h-10 bg-white/20 rounded-xl backdrop-blur-sm"></div>
                       </div>
-                      
+
                       {/* Stats Cards */}
                       <div className="grid grid-cols-2 gap-3">
                         <div className="bg-white/10 backdrop-blur-sm rounded-xl p-3">
@@ -60,54 +91,32 @@ export function ProductShowcase() {
                         </div>
                       </div>
                     </div>
-                    
+
                     {/* Recent Scans */}
                     <div className="p-6 space-y-3">
                       <div className="text-sm font-semibold text-slate-900 mb-4">Análisis Recientes</div>
-                      
-                      <div className="bg-white rounded-2xl p-4 shadow-lg border border-slate-100">
-                        <div className="flex items-center gap-3 mb-3">
-                          <div className="w-12 h-12 bg-gradient-to-br from-cyan-100 to-blue-100 rounded-lg"></div>
-                          <div className="flex-1">
-                            <div className="text-sm font-semibold text-slate-900">Paciente #4721</div>
-                            <div className="text-xs text-slate-500">Hace 2 min</div>
+
+                      {[
+                        { id: '4721', time: '2 min', risk: 'Bajo Riesgo', riskColor: 'green', barGradient: 'from-green-400 to-emerald-500', imgGradient: 'from-cyan-100 to-blue-100' },
+                        { id: '4720', time: '5 min', risk: 'Alto Riesgo', riskColor: 'orange', barGradient: 'from-orange-400 to-red-500', imgGradient: 'from-orange-100 to-red-100' },
+                        { id: '4719', time: '12 min', risk: 'Moderado', riskColor: 'blue', barGradient: 'from-blue-400 to-cyan-500', imgGradient: 'from-cyan-100 to-blue-100' },
+                      ].map((scan) => (
+                        <div key={scan.id} className="bg-white rounded-2xl p-4 shadow-lg border border-slate-100 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300">
+                          <div className="flex items-center gap-3 mb-3">
+                            <div className={`w-12 h-12 bg-gradient-to-br ${scan.imgGradient} rounded-lg`}></div>
+                            <div className="flex-1">
+                              <div className="text-sm font-semibold text-slate-900">Paciente #{scan.id}</div>
+                              <div className="text-xs text-slate-500">Hace {scan.time}</div>
+                            </div>
+                            <div className={`px-2 py-1 bg-${scan.riskColor}-100 text-${scan.riskColor}-700 text-xs font-semibold rounded-full`}>
+                              {scan.risk}
+                            </div>
                           </div>
-                          <div className="px-2 py-1 bg-green-100 text-green-700 text-xs font-semibold rounded-full">
-                            Bajo Riesgo
-                          </div>
+                          <div className={`h-2 bg-gradient-to-r ${scan.barGradient} rounded-full`}></div>
                         </div>
-                        <div className="h-2 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full"></div>
-                      </div>
-                      
-                      <div className="bg-white rounded-2xl p-4 shadow-lg border border-slate-100">
-                        <div className="flex items-center gap-3 mb-3">
-                          <div className="w-12 h-12 bg-gradient-to-br from-orange-100 to-red-100 rounded-lg"></div>
-                          <div className="flex-1">
-                            <div className="text-sm font-semibold text-slate-900">Paciente #4720</div>
-                            <div className="text-xs text-slate-500">Hace 5 min</div>
-                          </div>
-                          <div className="px-2 py-1 bg-orange-100 text-orange-700 text-xs font-semibold rounded-full">
-                            Alto Riesgo
-                          </div>
-                        </div>
-                        <div className="h-2 bg-gradient-to-r from-orange-400 to-red-500 rounded-full"></div>
-                      </div>
-                      
-                      <div className="bg-white rounded-2xl p-4 shadow-lg border border-slate-100">
-                        <div className="flex items-center gap-3 mb-3">
-                          <div className="w-12 h-12 bg-gradient-to-br from-cyan-100 to-blue-100 rounded-lg"></div>
-                          <div className="flex-1">
-                            <div className="text-sm font-semibold text-slate-900">Paciente #4719</div>
-                            <div className="text-xs text-slate-500">Hace 12 min</div>
-                          </div>
-                          <div className="px-2 py-1 bg-blue-100 text-blue-700 text-xs font-semibold rounded-full">
-                            Moderado
-                          </div>
-                        </div>
-                        <div className="h-2 bg-gradient-to-r from-blue-400 to-cyan-500 rounded-full"></div>
-                      </div>
+                      ))}
                     </div>
-                    
+
                     {/* Bottom Nav */}
                     <div className="border-t border-slate-200 p-4">
                       <div className="grid grid-cols-4 gap-2">
@@ -129,9 +138,9 @@ export function ProductShowcase() {
                   </div>
                 </div>
               </div>
-              
+
               {/* Floating badges */}
-              <div className="absolute -left-6 top-1/4 bg-white rounded-2xl shadow-xl p-4 border border-slate-200">
+              <div className="absolute -left-6 top-1/4 bg-white rounded-2xl shadow-xl p-4 border border-slate-200 hover:scale-105 hover:shadow-2xl transition-all duration-300">
                 <div className="flex items-center gap-3">
                   <Cloud className="w-8 h-8 text-cyan-600" />
                   <div>
@@ -140,8 +149,8 @@ export function ProductShowcase() {
                   </div>
                 </div>
               </div>
-              
-              <div className="absolute -right-6 top-2/3 bg-white rounded-2xl shadow-xl p-4 border border-slate-200">
+
+              <div className="absolute -right-6 top-2/3 bg-white rounded-2xl shadow-xl p-4 border border-slate-200 hover:scale-105 hover:shadow-2xl transition-all duration-300">
                 <div className="flex items-center gap-3">
                   <Wifi className="w-8 h-8 text-blue-600" />
                   <div>
@@ -152,59 +161,36 @@ export function ProductShowcase() {
               </div>
             </div>
           </div>
-          
+
           {/* Right - Features */}
           <div className="space-y-8">
-            <div>
+            <div ref={features.ref} style={features.style}>
               <h3 className="text-3xl font-bold text-slate-900 mb-4">
                 Poder Diagnóstico Empresarial en Tu Bolsillo
               </h3>
               <p className="text-lg text-slate-600 leading-relaxed">
-                RetiScan PWA ofrece screening de retinopatía diabética de grado clínico 
-                mediante una Progressive Web Application accesible desde cualquier dispositivo moderno. 
+                RetiScan PWA ofrece screening de retinopatía diabética de grado clínico
+                mediante una Progressive Web Application accesible desde cualquier dispositivo moderno.
                 Sin descargas de tiendas de aplicaciones, sin instalaciones complejas.
               </p>
             </div>
-            
+
             <div className="space-y-6">
-              <div className="flex items-start gap-4">
-                <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-xl flex items-center justify-center shadow-lg">
-                  <Smartphone className="w-6 h-6 text-white" />
-                </div>
-                <div>
-                  <h4 className="text-lg font-bold text-slate-900 mb-2">Accesibilidad Multiplataforma</h4>
-                  <p className="text-slate-600">
-                    Despliega en smartphones, tablets y estaciones de trabajo. Una plataforma, 
-                    dispositivos ilimitados. Perfecto para unidades móviles y prácticas multilocalización.
-                  </p>
-                </div>
-              </div>
-              
-              <div className="flex items-start gap-4">
-                <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-blue-600 to-blue-700 rounded-xl flex items-center justify-center shadow-lg">
-                  <Zap className="w-6 h-6 text-white" />
-                </div>
-                <div>
-                  <h4 className="text-lg font-bold text-slate-900 mb-2">Análisis por Aprendizaje Profundo en Tiempo Real</h4>
-                  <p className="text-slate-600">
-                    Nuestra red neuronal convolucional procesa imágenes retinales en menos de 2 minutos, 
-                    identificando microaneurismas, hemorragias y exudados con 94.7% de precisión.
-                  </p>
-                </div>
-              </div>
-              
-              <div className="flex items-start gap-4">
-                <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center shadow-lg">
-                  <Shield className="w-6 h-6 text-white" />
-                </div>
-                <div>
-                  <h4 className="text-lg font-bold text-slate-900 mb-2">Infraestructura Cloud Conforme a HIPAA</h4>
-                  <p className="text-slate-600">
-                    Almacenamiento seguro de expedientes clínicos con cifrado end-to-end, respaldos automáticos 
-                    y registros de auditoría completos. Todos los centros de datos certificados SOC 2 Type II.
-                  </p>
-                </div>
-              </div>
+              {featureItems.map((feat, index) => {
+                const Icon = feat.icon;
+                const reveal = featReveals[index];
+                return (
+                  <div key={index} ref={reveal.ref} style={reveal.style} className="flex items-start gap-4 group">
+                    <div className={`flex-shrink-0 w-12 h-12 bg-gradient-to-br ${feat.gradient} rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:rotate-6 transition-all duration-300`}>
+                      <Icon className="w-6 h-6 text-white" />
+                    </div>
+                    <div>
+                      <h4 className="text-lg font-bold text-slate-900 mb-2">{feat.title}</h4>
+                      <p className="text-slate-600">{feat.desc}</p>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
