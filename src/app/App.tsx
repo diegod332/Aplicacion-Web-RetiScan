@@ -13,12 +13,15 @@ import { AnimatedDivider } from '@/app/components/AnimatedDivider';
 import { ScrollProgress } from '@/app/components/ScrollProgress';
 import { useLenis } from '@/hooks/useLenis';
 
+import { ScrollToTop } from '@/app/components/ScrollToTop';
+
 export default function App() {
   useLenis();
 
   return (
     <div className="min-h-screen bg-white">
       <ScrollProgress />
+      <ScrollToTop />
       <LoadingScreen />
       <Header />
       <Hero />

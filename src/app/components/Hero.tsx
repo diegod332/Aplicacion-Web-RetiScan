@@ -15,7 +15,6 @@ export function Hero() {
     <section
       className="relative min-h-screen flex items-center overflow-hidden noise-overlay"
     >
-      {/* ANIMATED gradient background — this moves constantly */}
       <div
         className="absolute inset-0 animated-gradient"
         style={{
@@ -70,9 +69,12 @@ export function Hero() {
 
           {/* Buttons — dramatic slide up */}
           <div className="animate-slide-up delay-1000 flex flex-col sm:flex-row gap-4 pt-4">
-            <MagneticButton className="group px-8 py-4 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white rounded-xl font-semibold shadow-2xl shadow-orange-500/40 hover:shadow-orange-500/60 hover:-translate-y-2 active:translate-y-0 transition-all duration-500 flex items-center justify-center gap-3 text-lg">
+            <MagneticButton
+              className="group px-8 py-4 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white rounded-xl font-semibold shadow-2xl shadow-orange-500/40 hover:shadow-orange-500/60 hover:-translate-y-2 active:translate-y-0 transition-all duration-500 flex items-center justify-center gap-3 text-lg"
+              href="#suscripcion"
+            >
               <Eye className="w-5 h-5" />
-              Ver Planes
+              <span>Ver Planes</span>
               <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform duration-300" />
             </MagneticButton>
 

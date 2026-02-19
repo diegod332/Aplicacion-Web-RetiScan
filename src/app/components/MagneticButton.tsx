@@ -17,11 +17,13 @@ export function MagneticButton({
     className = '',
     strength = 0.3,
     onClick,
-}: MagneticButtonProps) {
-    const ref = useRef<HTMLButtonElement>(null);
+    href,
+    ...props
+}: MagneticButtonProps & { href?: string } & React.ButtonHTMLAttributes<HTMLButtonElement> & React.AnchorHTMLAttributes<HTMLAnchorElement>) {
+    const ref = useRef<HTMLElement>(null);
     const [transform, setTransform] = useState({ x: 0, y: 0 });
 
-    const handleMouseMove = useCallback((e: MouseEvent<HTMLButtonElement>) => {
+    const handleMouseMove = useCallback((e: MouseEvent<HTMLElement>) => {
         if (!ref.current) return;
         const rect = ref.current.getBoundingClientRect();
         const centerX = rect.left + rect.width / 2;
@@ -35,19 +37,37 @@ export function MagneticButton({
         setTransform({ x: 0, y: 0 });
     }, []);
 
+    const commonProps = {
+        className,
+        onMouseMove: handleMouseMove,
+        onMouseLeave: handleMouseLeave,
+        style: {
+            transform: `translate(${transform.x}px, ${transform.y}px)`,
+            transition: transform.x === 0 && transform.y === 0
+                ? 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)'
+                : 'transform 0.15s ease-out',
+        },
+        ...props
+    };
+
+    if (href) {
+        return (
+            <a
+                ref={ref as React.RefObject<HTMLAnchorElement>}
+                href={href}
+                onClick={onClick as React.MouseEventHandler<HTMLAnchorElement>}
+                {...commonProps as React.AnchorHTMLAttributes<HTMLAnchorElement>}
+            >
+                {children}
+            </a>
+        );
+    }
+
     return (
         <button
-            ref={ref}
-            className={className}
-            onClick={onClick}
-            onMouseMove={handleMouseMove}
-            onMouseLeave={handleMouseLeave}
-            style={{
-                transform: `translate(${transform.x}px, ${transform.y}px)`,
-                transition: transform.x === 0 && transform.y === 0
-                    ? 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)'
-                    : 'transform 0.15s ease-out',
-            }}
+            ref={ref as React.RefObject<HTMLButtonElement>}
+            onClick={onClick as React.MouseEventHandler<HTMLButtonElement>}
+            {...commonProps as React.ButtonHTMLAttributes<HTMLButtonElement>}
         >
             {children}
         </button>

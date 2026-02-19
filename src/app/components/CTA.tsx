@@ -52,10 +52,7 @@ export function CTA() {
         </div>
 
         <div ref={info.ref} style={info.style} className="mt-10 flex items-center justify-center gap-8 text-sm text-white">
-          <div className="flex items-center gap-2">
-            <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-            <span>Prueba Gratuita 14 Días</span>
-          </div>
+
           <div className="flex items-center gap-2">
             <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
             <span>Sin Tarjeta de Crédito</span>

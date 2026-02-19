@@ -44,6 +44,17 @@ export function useScrollReveal<T extends HTMLElement = HTMLDivElement>(
         );
 
         observer.observe(element);
+
+        // Fallback: Check if element is already in view on mount (e.g. Hero section)
+        const rect = element.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom > 0) {
+            if (delay > 0) {
+                setTimeout(() => setIsVisible(true), delay);
+            } else {
+                setIsVisible(true);
+            }
+        }
+
         return () => observer.disconnect();
     }, [threshold, rootMargin, delay, once]);
 

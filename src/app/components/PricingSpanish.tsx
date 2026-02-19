@@ -216,7 +216,7 @@ export function PricingSpanish() {
                         : 'bg-slate-900 hover:bg-slate-800 text-white hover:shadow-lg'
                         }`}
                     >
-                      Iniciar Prueba Gratuita
+                      Comprar Suscripcion
                     </button>
 
                     {/* Features */}
