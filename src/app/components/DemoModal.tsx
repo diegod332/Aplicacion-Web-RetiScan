@@ -301,16 +301,16 @@ function ProcessingScreen({ onComplete }: { onComplete: () => void }) {
     useEffect(() => {
         const interval = setInterval(() => {
             setProgress(p => {
-                const next = p + 2;
+                const next = p + 4; // Faster increment
                 if (next >= 100) {
                     clearInterval(interval);
-                    setTimeout(onComplete, 500);
+                    setTimeout(onComplete, 300); // Faster transition to results
                     return 100;
                 }
                 setStage(Math.min(Math.floor(next / (100 / stages.length)), stages.length - 1));
                 return next;
             });
-        }, 80);
+        }, 60); // Faster interval
         return () => clearInterval(interval);
     }, [onComplete, stages.length]);
 

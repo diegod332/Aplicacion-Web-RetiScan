@@ -15,10 +15,16 @@ export function Footer() {
           {/* Brand */}
           <div ref={brand.ref} style={brand.style} className="space-y-4">
             <div className="flex items-center gap-3">
-              <div>
-                <img src={logo} className="h-10 w-auto object-contain" />
+              <div className="bg-white p-2 rounded-xl flex items-center justify-center shadow-lg">
+                <img
+                  src={logo}
+                  className="h-8 w-auto object-contain"
+                  alt="RetiScan Logo"
+                />
               </div>
-              <span className="text-2xl font-semibold text-white">RetiScan</span>
+              <span className="text-2xl font-bold text-white">
+                RetiScan
+              </span>
             </div>
             <p className="text-sm leading-relaxed">
               Tecnología de inteligencia artificial para la detección temprana

@@ -164,7 +164,7 @@ export function PWABenefits() {
             const Icon = benefit.icon;
             const reveal = benefitReveals[index];
             return (
-              <div key={index} ref={reveal.ref} style={reveal.style} className="group relative bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:bg-white/10 hover:border-white/20 hover:-translate-y-2 hover:shadow-[0_20px_40px_-15px_rgba(0,204,255,0.2)] transition-all duration-500 cursor-default">
+              <div key={index} ref={reveal.ref} style={reveal.style} className="group relative bg-white rounded-2xl p-6 border border-slate-200 hover:border-white shadow-xl hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 cursor-default">
                 <div className="flex items-start gap-4">
                   <div className="flex-shrink-0">
                     <div className="w-12 h-12 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">
@@ -172,8 +172,8 @@ export function PWABenefits() {
                     </div>
                   </div>
                   <div>
-                    <h3 className="font-bold text-lg mb-2">{benefit.title}</h3>
-                    <p className="text-white text-sm leading-relaxed">{benefit.description}</p>
+                    <h3 className="font-bold text-lg mb-2 text-slate-900">{benefit.title}</h3>
+                    <p className="text-slate-600 text-sm leading-relaxed">{benefit.description}</p>
                   </div>
                 </div>
               </div>

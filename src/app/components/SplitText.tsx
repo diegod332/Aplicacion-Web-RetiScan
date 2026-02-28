@@ -53,7 +53,7 @@ export function SplitText({
             {words.map((word, i) => (
                 <span
                     key={i}
-                    className="inline-block overflow-hidden mr-[0.3em]"
+                    className="inline-block overflow-hidden mr-[0.3em] pb-4 -mb-4"
                 >
                     <span
                         className="inline-block"

@@ -23,6 +23,8 @@
 .animated-gradient {
     background-size: 300% 300%;
     animation: gradient-shift 8s ease infinite;
+    will-change: background-position;
+    transform: translateZ(0);
 }
 
 /* ============================
@@ -43,6 +45,8 @@
    ============================ */
 .noise-overlay {
     position: relative;
+    transform: translateZ(0);
+    /* Force GPU layer */
 }
 
 .noise-overlay::after {
@@ -81,16 +85,22 @@
 
 .animate-float {
     animation: float 6s ease-in-out infinite;
+    will-change: transform;
+    backface-visibility: hidden;
 }
 
 .animate-float-delayed {
     animation: float 7s ease-in-out infinite;
     animation-delay: -2s;
+    will-change: transform;
+    backface-visibility: hidden;
 }
 
 .animate-float-slow {
     animation: float 9s ease-in-out infinite;
     animation-delay: -4s;
+    will-change: transform;
+    backface-visibility: hidden;
 }
 
 /* ============================
@@ -136,14 +146,17 @@
 
 .animate-slide-up {
     animation: slide-up-dramatic 1.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+    will-change: transform, opacity;
 }
 
 .animate-scale-in {
     animation: scale-in 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+    will-change: transform, opacity;
 }
 
 .animate-blur-in {
     animation: blur-in 1.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+    will-change: filter, transform, opacity;
 }
 
 /* Stagger delays for hero entrance */

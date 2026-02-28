@@ -49,6 +49,10 @@ export function Header() {
             Seguridad
             <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full"></span>
           </a>
+          <a href="#contacto" className="text-slate-700 hover:text-blue-700 transition-colors relative group">
+            Contacto
+            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full"></span>
+          </a>
         </nav>
 
         {/* Mobile Menu Button */}
@@ -98,6 +102,14 @@ export function Header() {
               >
                 Seguridad
               </a>
+              <a
+                href="#contacto"
+                className="text-lg font-medium text-slate-800"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Contacto
+              </a>
+              <div className="h-px bg-slate-100 my-4" />
             </nav>
           </motion.div>
         )}

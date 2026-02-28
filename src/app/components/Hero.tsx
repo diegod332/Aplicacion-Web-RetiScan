@@ -49,7 +49,7 @@ export function Hero() {
           {/* WORD BY WORD animated title */}
           <SplitText
             as="h1"
-            className="text-5xl lg:text-7xl font-bold leading-tight text-white"
+            className="text-5xl lg:text-6xl font-bold leading-tight text-balance text-white max-w-4xl mx-auto lg:mx-0"
             baseDelay={500}
             stagger={80}
           >
@@ -60,7 +60,7 @@ export function Hero() {
           <div className="animate-slide-up delay-800">
             <p className="text-xl lg:text-2xl text-white/90 leading-relaxed">
               Preciso, rápido y accesible desde cualquier dispositivo.
-              <span className="font-semibold text-shimmer bg-gradient-to-r from-cyan-300 via-white to-cyan-300 bg-clip-text text-transparent">
+              <span className="font-bold text-shimmer bg-gradient-to-r from-amber-100 via-white to-amber-100 bg-clip-text text-transparent drop-shadow-sm">
                 {' '}Screening de nivel empresarial{' '}
               </span>
               con análisis de aprendizaje profundo.
@@ -79,7 +79,7 @@ export function Hero() {
             </MagneticButton>
 
             <MagneticButton
-              className="px-8 py-4 bg-white/10 hover:bg-white/25 backdrop-blur-sm text-white border-2 border-white/30 hover:border-white/60 rounded-xl font-semibold hover:-translate-y-2 active:translate-y-0 transition-all duration-500 text-lg flex items-center justify-center gap-2"
+              className="px-8 py-4 bg-white hover:bg-slate-50 text-blue-900 shadow-xl hover:shadow-2xl rounded-xl font-bold hover:-translate-y-2 active:translate-y-0 transition-all duration-500 text-lg flex items-center justify-center gap-2"
               onClick={() => setIsDemoOpen(true)}
             >
               <Play className="w-5 h-5" />
