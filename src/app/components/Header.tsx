@@ -3,6 +3,10 @@ import { Menu, X } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
 import logo from '../../assets/logo_sin_fondo.png';
 
+interface HeaderProps {
+  onNavigate?: () => void;
+}
+
 const navLinks = [
   { id: 'producto', label: 'Producto' },
   { id: 'como-funciona', label: 'Cómo Funciona' },
@@ -11,7 +15,7 @@ const navLinks = [
   { id: 'contacto', label: 'Contacto' }
 ];
 
-export function Header() {
+export function Header({ onNavigate }: HeaderProps) {
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -22,31 +26,15 @@ export function Header() {
 
       // ScrollSpy logic using getBoundingClientRect
       let currentSection = '';
-      let minDistance = Infinity;
-
-      // Distance threshold from top of viewport (e.g. 150px)
       const threshold = 150;
 
       for (const { id } of navLinks) {
         const element = document.getElementById(id);
         if (element) {
           const rect = element.getBoundingClientRect();
-
-          // Determine if section is currently active
-          // A section is active if its top is above the threshold AND its bottom is below the threshold
           if (rect.top <= threshold && rect.bottom > threshold) {
             currentSection = id;
             break;
-          }
-
-          // Fallback: If no section strictly encompasses the threshold, find the closest one below it
-          const distance = Math.abs(rect.top - threshold);
-          if (distance < minDistance) {
-            minDistance = distance;
-            // Only consider it if it's relatively close (e.g. within viewport)
-            if (rect.top < window.innerHeight && rect.bottom > 0) {
-              currentSection = id;
-            }
           }
         }
       }
@@ -59,12 +47,8 @@ export function Header() {
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    // Run once on mount to set initial state
     handleScroll();
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
@@ -91,6 +75,7 @@ export function Header() {
             <a
               key={link.id}
               href={`#${link.id}`}
+              onClick={() => onNavigate?.()}
               className={`transition-colors relative py-1 group ${activeSection === link.id ? 'text-slate-800 font-medium' : 'text-slate-600 hover:text-slate-800'}`}
             >
               {link.label}
@@ -123,7 +108,10 @@ export function Header() {
                   key={link.id}
                   href={`#${link.id}`}
                   className={`text-lg font-medium ${activeSection === link.id ? 'text-blue-700' : 'text-slate-700 hover:text-blue-700'}`}
-                  onClick={() => setIsMenuOpen(false)}
+                  onClick={() => {
+                    setIsMenuOpen(false);
+                    onNavigate?.();
+                  }}
                 >
                   {link.label}
                 </a>

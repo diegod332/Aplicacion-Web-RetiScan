@@ -72,7 +72,11 @@ const plans = [
   }
 ];
 
-export function Pricing() {
+interface PricingProps {
+  onSelectPlan?: (plan: string) => void;
+}
+
+export function Pricing({ onSelectPlan }: PricingProps) {
   const [billingCycle, setBillingCycle] = useState<'gratis' | 'mensual' | 'anual'>('gratis');
   const savingsPercentage = 20;
 
@@ -222,6 +226,7 @@ export function Pricing() {
 
                     {/* CTA Button */}
                     <button
+                      onClick={() => onSelectPlan?.(isFree ? 'Gratis' : plan.name)}
                       className={`w-full py-3 px-4 rounded-xl font-bold text-sm transition-all duration-300 mb-6 hover:-translate-y-0.5 relative overflow-hidden group/btn ${plan.popular
                         ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-[0_4px_15px_rgba(6,182,212,0.4)] hover:shadow-[0_6px_20px_rgba(6,182,212,0.5)] border border-cyan-400/50'
                         : 'bg-slate-900 hover:bg-slate-800 text-white shadow-md'

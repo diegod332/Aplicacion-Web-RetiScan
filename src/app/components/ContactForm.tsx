@@ -152,8 +152,8 @@ export function ContactForm() {
                                             <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                                                 <Users className="h-5 w-5 text-slate-400" />
                                             </div>
-                                            <select required className="w-full bg-white border border-black/20 rounded-xl pl-11 pr-10 py-3 text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all appearance-none [&>option]:text-slate-900 font-medium cursor-pointer">
-                                                <option value="" disabled selected>Selecciona...</option>
+                                            <select required defaultValue="" className="w-full bg-white border border-black/20 rounded-xl pl-11 pr-10 py-3 text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all appearance-none [&>option]:text-slate-900 font-medium cursor-pointer">
+                                                <option value="" disabled>Selecciona...</option>
                                                 <option value="low">1 - 500 pacientes</option>
                                                 <option value="medium">501 - 2,000 pacientes</option>
                                                 <option value="high">Más de 2,000 pacientes</option>
@@ -168,8 +168,8 @@ export function ContactForm() {
                                     <div className="space-y-2">
                                         <label className="text-sm font-medium text-white/90">¿Qué te interesa?</label>
                                         <div className="relative">
-                                            <select required className="w-full bg-white border border-black/20 rounded-xl px-4 pr-10 py-3 text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all appearance-none [&>option]:text-slate-900 font-medium cursor-pointer">
-                                                <option value="" disabled selected>Selecciona...</option>
+                                            <select required defaultValue="" className="w-full bg-white border border-black/20 rounded-xl px-4 pr-10 py-3 text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all appearance-none [&>option]:text-slate-900 font-medium cursor-pointer">
+                                                <option value="" disabled>Selecciona...</option>
                                                 <option value="info">Más información</option>
                                                 <option value="plan_specialist">Contratar Plan Especialista</option>
                                                 <option value="plan_clinic">Contratar Plan Clínica/Enterprise</option>
