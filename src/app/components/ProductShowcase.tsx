@@ -54,7 +54,7 @@ export function ProductShowcase() {
             <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/20 to-blue-600/20 rounded-3xl blur-3xl"></div>
 
             {/* Phone Frame */}
-            <div className="relative max-w-[280px] sm:max-w-[320px] mx-auto">
+            <div className="relative max-w-[220px] sm:max-w-[250px] mx-auto">
               <div className="bg-slate-900 rounded-[3rem] p-3 shadow-2xl border-4 md:border-8 border-slate-800 hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.3)] transition-shadow duration-500">
                 <div className="bg-white rounded-[2.5rem] overflow-hidden">
                   {/* Status Bar */}
@@ -65,54 +65,53 @@ export function ProductShowcase() {
                   {/* App Content */}
                   <div className="bg-gradient-to-br from-slate-50 to-white">
                     {/* App Header */}
-                    <div className="bg-gradient-to-r from-cyan-500 to-blue-600 p-6 text-white">
-                      <div className="flex items-center justify-between mb-6">
-                        <div className="flex items-center gap-3">
-                          <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm">
-                            <Activity className="w-6 h-6 text-white" />
+                    <div className="bg-gradient-to-r from-cyan-500 to-blue-600 p-4 text-white">
+                      <div className="flex items-center justify-between mb-4">
+                        <div className="flex items-center gap-2">
+                          <div className="w-8 h-8 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm">
+                            <Activity className="w-4 h-4 text-white" />
                           </div>
                           <div>
-                            <div className="text-xs opacity-80">RetiScan PWA</div>
-                            <div className="font-bold">Panel de Control</div>
+                            <div className="text-[10px] opacity-80">RetiScan PWA</div>
+                            <div className="font-bold text-sm">Panel de Control</div>
                           </div>
                         </div>
-                        <div className="w-10 h-10 bg-white/20 rounded-xl backdrop-blur-sm"></div>
+                        <div className="w-8 h-8 bg-white/20 rounded-xl backdrop-blur-sm"></div>
                       </div>
 
                       {/* Stats Cards */}
-                      <div className="grid grid-cols-2 gap-3">
-                        <div className="bg-white/10 backdrop-blur-sm rounded-xl p-3">
-                          <div className="text-2xl font-bold">127</div>
-                          <div className="text-xs opacity-80">Escaneos Hoy</div>
+                      <div className="grid grid-cols-2 gap-2">
+                        <div className="bg-white/10 backdrop-blur-sm rounded-xl p-2">
+                          <div className="text-xl font-bold">127</div>
+                          <div className="text-[10px] opacity-80">Escaneos Hoy</div>
                         </div>
-                        <div className="bg-white/10 backdrop-blur-sm rounded-xl p-3">
-                          <div className="text-2xl font-bold">8</div>
-                          <div className="text-xs opacity-80">Alto Riesgo</div>
+                        <div className="bg-white/10 backdrop-blur-sm rounded-xl p-2">
+                          <div className="text-xl font-bold">8</div>
+                          <div className="text-[10px] opacity-80">Alto Riesgo</div>
                         </div>
                       </div>
                     </div>
 
                     {/* Recent Scans */}
-                    <div className="p-6 space-y-3">
-                      <div className="text-sm font-semibold text-slate-900 mb-4">Análisis Recientes</div>
+                    <div className="p-4 space-y-2">
+                      <div className="text-xs font-semibold text-slate-900 mb-2">Análisis Recientes</div>
 
                       {[
                         { id: '4721', time: '2 min', risk: 'Bajo Riesgo', riskColor: 'green', barGradient: 'from-green-400 to-emerald-500', imgGradient: 'from-cyan-100 to-blue-100' },
                         { id: '4720', time: '5 min', risk: 'Alto Riesgo', riskColor: 'orange', barGradient: 'from-orange-400 to-red-500', imgGradient: 'from-orange-100 to-red-100' },
-                        { id: '4719', time: '12 min', risk: 'Moderado', riskColor: 'blue', barGradient: 'from-blue-400 to-cyan-500', imgGradient: 'from-cyan-100 to-blue-100' },
                       ].map((scan) => (
-                        <div key={scan.id} className="bg-white rounded-2xl p-4 shadow-lg border border-slate-100 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300">
-                          <div className="flex items-center gap-3 mb-3">
-                            <div className={`w-12 h-12 bg-gradient-to-br ${scan.imgGradient} rounded-lg`}></div>
-                            <div className="flex-1">
-                              <div className="text-sm font-semibold text-slate-900">Paciente #{scan.id}</div>
-                              <div className="text-xs text-slate-500">Hace {scan.time}</div>
+                        <div key={scan.id} className="bg-white rounded-xl p-3 shadow border border-slate-100">
+                          <div className="flex items-center gap-2 mb-2">
+                            <div className={`w-8 h-8 bg-gradient-to-br ${scan.imgGradient} rounded-lg flex-shrink-0`}></div>
+                            <div className="flex-1 min-w-0">
+                              <div className="text-xs font-semibold text-slate-900">Paciente #{scan.id}</div>
+                              <div className="text-[10px] text-slate-500">Hace {scan.time}</div>
                             </div>
-                            <div className={`px-2 py-1 bg-${scan.riskColor}-100 text-${scan.riskColor}-700 text-xs font-semibold rounded-full`}>
+                            <div className={`px-1.5 py-0.5 text-[9px] font-bold rounded-full bg-${scan.riskColor}-100 text-${scan.riskColor}-700 whitespace-nowrap`}>
                               {scan.risk}
                             </div>
                           </div>
-                          <div className={`h-2 bg-gradient-to-r ${scan.barGradient} rounded-full`}></div>
+                          <div className={`h-1.5 bg-gradient-to-r ${scan.barGradient} rounded-full`}></div>
                         </div>
                       ))}
                     </div>

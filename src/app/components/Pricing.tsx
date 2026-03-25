@@ -2,56 +2,78 @@ import { Check, X, Zap, Building, Sparkles } from 'lucide-react';
 import { useState } from 'react';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 import { SplitText } from '@/app/components/SplitText';
+import { SubscriptionToggle } from '@/app/components/SubscriptionToggle';
 
 const plans = [
   {
     name: 'Especialista',
     billing: 'Mensual',
     icon: Zap,
-    description: 'Para consultorios individuales y prácticas independientes pequeñas',
+    description: 'Para oftalmólogos independientes y consultorios pequeños con un solo profesional',
     monthlyPrice: 299,
     annualPrice: 239,
     popular: false,
     gradient: 'from-slate-600 to-slate-700',
     features: [
       { name: 'Escaneos de IA ilimitados', included: true },
-      { name: 'Almacenamiento seguro de expedientes (PHI)', included: true },
-      { name: 'Reportes automáticos en PDF', included: true },
-      { name: 'Cifrado de datos conforme a HIPAA', included: true },
-      { name: 'Soporte por email (48 horas)', included: true },
-      { name: 'Cuenta de un solo especialista', included: true },
-      { name: 'Cuentas para múltiples especialistas', included: false },
-      { name: 'Prioridad en procesamiento de IA', included: false },
-      { name: 'Panel de analítica avanzada', included: false },
-      { name: 'Acceso API para integración EHR', included: false }
+      { name: 'Almacenamiento cifrado de expedientes (PHI)', included: true },
+      { name: 'Reportes diagnósticos en PDF estándar', included: true },
+      { name: 'Cumplimiento HIPAA/NOM-024 garantizado', included: true },
+      { name: 'Soporte por email (respuesta < 48h)', included: true },
+      { name: '1 cuenta de especialista', included: true },
+      { name: 'Multi-usuario (hasta 10 cuentas)', included: false },
+      { name: 'Reportes con marca de la clínica', included: false },
+      { name: 'Integración PACS / EHR', included: false },
+      { name: 'Auditoría de acceso a expedientes', included: false },
+      { name: 'Gestor de cuenta dedicado', included: false }
+    ],
+    freeFeatures: [
+      { name: '5 escaneos de IA al mes', included: true },
+      { name: 'Resultados en tiempo real (sin almacenamiento)', included: true },
+      { name: 'Cumplimiento HIPAA/NOM-024 garantizado', included: true },
+      { name: 'Reportes diagnósticos en PDF', included: false },
+      { name: 'Almacenamiento cifrado de expedientes', included: false },
+      { name: 'Soporte técnico', included: false },
+      { name: 'Multi-usuario', included: false }
     ]
   },
   {
     name: 'Clínica',
     billing: 'Anual',
     icon: Building,
-    description: 'Para centros médicos que requieren acceso multiusuario y funciones avanzadas',
+    description: 'Para centros médicos y hospitales que requieren acceso multi-profesional y funciones avanzadas',
     monthlyPrice: 899,
     annualPrice: 719,
     popular: true,
     gradient: 'from-cyan-500 to-blue-600',
     features: [
       { name: 'Escaneos de IA ilimitados', included: true },
-      { name: 'Almacenamiento seguro de expedientes (ilimitado)', included: true },
-      { name: 'Reportes automáticos en PDF personalizables', included: true },
-      { name: 'Cifrado de datos conforme a HIPAA', included: true },
-      { name: 'Soporte técnico prioritario (24 horas)', included: true },
+      { name: 'Almacenamiento cifrado ilimitado', included: true },
+      { name: 'Reportes PDF personalizables con marca', included: true },
+      { name: 'Cumplimiento HIPAA/NOM-024 garantizado', included: true },
+      { name: 'Soporte prioritario 24/7 (teléfono y chat)', included: true },
       { name: 'Hasta 10 cuentas de especialistas', included: true },
       { name: 'Prioridad en procesamiento de IA', included: true },
-      { name: 'Panel de analítica avanzada', included: true },
-      { name: 'Acceso API para integración EHR', included: true },
+      { name: 'Integración PACS / EHR', included: true },
+      { name: 'Auditoría de acceso a expedientes', included: true },
+      { name: 'Panel de analítica clínica avanzada', included: true },
       { name: 'Gestor de cuenta dedicado', included: true }
+    ],
+    freeFeatures: [
+      { name: '5 escaneos de IA al mes', included: true },
+      { name: 'Resultados en tiempo real (sin almacenamiento)', included: true },
+      { name: 'Cumplimiento HIPAA/NOM-024 garantizado', included: true },
+      { name: 'Acceso a documentación médica', included: true },
+      { name: 'Reportes PDF personalizables', included: false },
+      { name: 'Multi-usuario', included: false },
+      { name: 'Integración PACS / EHR', included: false },
+      { name: 'Soporte técnico', included: false }
     ]
   }
 ];
 
 export function Pricing() {
-  const [isAnnual, setIsAnnual] = useState(false);
+  const [billingCycle, setBillingCycle] = useState<'gratis' | 'mensual' | 'anual'>('gratis');
   const savingsPercentage = 20;
 
   const title = useScrollReveal('fade-up');
@@ -92,80 +114,57 @@ export function Pricing() {
           </p>
         </div>
 
-        {/* Billing Toggle */}
-        <div ref={toggle.ref} style={toggle.style} className="flex items-center justify-center gap-4 mb-8 lg:mb-12">
-          <span className={`text-base font-medium transition-colors ${!isAnnual ? 'text-white' : 'text-white/70'}`}>
-            Mensual
-          </span>
-
-          <button
-            onClick={() => setIsAnnual(!isAnnual)}
-            className="relative w-16 h-8 rounded-full transition-all duration-300 hover:shadow-lg"
-            style={{
-              background: isAnnual
-                ? 'linear-gradient(to right, rgb(6 182 212), rgb(37 99 235))'
-                : 'linear-gradient(to right, rgba(255,255,255,0.3), rgba(255,255,255,0.4))'
-            }}
-          >
-            <div
-              className="absolute top-1 left-1 w-6 h-6 bg-white rounded-full shadow-lg transition-transform duration-300"
-              style={{
-                transform: isAnnual ? 'translateX(32px)' : 'translateX(0)'
-              }}
-            />
-          </button>
-
-          <div className="flex items-center gap-2">
-            <span className={`text-base font-medium transition-colors ${isAnnual ? 'text-white' : 'text-white/70'}`}>
-              Anual
-            </span>
-            <div className="px-2 py-0.5 bg-gradient-to-r from-green-500 to-emerald-600 rounded-full">
-              <span className="text-xs font-bold text-white">-{savingsPercentage}%</span>
-            </div>
-          </div>
+        {/* Billing Toggle - Liquid Morphing */}
+        <div ref={toggle.ref} style={toggle.style} className="flex justify-center mb-12 lg:mb-16">
+          <SubscriptionToggle billingCycle={billingCycle} onChange={setBillingCycle} />
         </div>
 
-        {/* Pricing Cards — these stay white for contrast */}
-        <div className="grid lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
+        {/* Pricing Cards — Premium White & Compact Design */}
+        <div className="grid lg:grid-cols-2 gap-6 max-w-5xl mx-auto relative z-10 items-center">
           {plans.map((plan, index) => {
             const Icon = plan.icon;
-            const price = isAnnual ? plan.annualPrice : plan.monthlyPrice;
-            const savings = isAnnual ? (plan.monthlyPrice - plan.annualPrice) : 0;
+            const isFree = billingCycle === 'gratis';
+            const price = isFree ? 0 : (billingCycle === 'anual' ? plan.annualPrice : plan.monthlyPrice);
+            const savings = billingCycle === 'anual' ? (plan.monthlyPrice - plan.annualPrice) : 0;
+            const isAnnual = billingCycle === 'anual';
+
+            // En modo gratis usamos el array dedicado de features limitadas
+            const features = isFree ? plan.freeFeatures : plan.features;
 
             return (
               <div
                 key={index}
                 ref={index === 0 ? cardLeft.ref : cardRight.ref}
                 style={index === 0 ? cardLeft.style : cardRight.style}
-                className={`relative group ${plan.popular ? 'lg:-mt-6' : ''}`}
+                className={`relative group flex flex-col ${plan.popular ? 'lg:-mt-4 lg:mb-[-1rem] z-20' : 'z-10'}`}
               >
                 {/* Popular badge */}
                 {plan.popular && (
-                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-10">
-                    <div className="flex items-center gap-1.5 px-4 py-1.5 bg-gradient-to-r from-orange-500 to-orange-600 rounded-full shadow-lg">
-                      <Sparkles className="w-3 h-3 text-white" />
-                      <span className="text-xs font-bold text-white">Mejor Valor</span>
+                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-30">
+                    <div className="flex items-center gap-1.5 px-4 py-1.5 bg-gradient-to-r from-orange-400 via-rose-500 to-purple-600 rounded-full shadow-md ring-1 ring-white/60 backdrop-blur-md">
+                      <Sparkles className="w-3 h-3 text-white animate-pulse" />
+                      <span className="text-[10px] md:text-[11px] font-extrabold text-white tracking-widest uppercase">Mejor Valor</span>
                     </div>
                   </div>
                 )}
 
                 <div
-                  className={`relative h-full bg-white rounded-3xl border-2 transition-all duration-500 hover:-translate-y-2 ${plan.popular
-                    ? 'border-cyan-500 shadow-2xl shadow-cyan-500/20 hover:shadow-[0_30px_60px_-15px_rgba(0,204,255,0.3)]'
-                    : 'border-white/50 shadow-lg hover:shadow-2xl'
+                  className={`relative flex-1 bg-white/95 backdrop-blur-xl rounded-3xl transition-all duration-500 hover:-translate-y-1 overflow-hidden flex flex-col ${plan.popular
+                    ? 'border-2 border-cyan-400 shadow-[0_15px_40px_-10px_rgba(6,182,212,0.25)] hover:shadow-[0_20px_50px_-10px_rgba(6,182,212,0.35)] lg:scale-[1.03]'
+                    : 'border border-slate-200/80 shadow-lg hover:shadow-xl hover:border-slate-300'
                     }`}
                 >
-                  {/* Glow effect for popular plan */}
-                  {plan.popular && (
-                    <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/20 to-blue-600/20 rounded-3xl blur-2xl -z-10"></div>
-                  )}
+                  {/* Spotlight Hover Effect */}
+                  <div className="absolute inset-0 z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
+                    style={{ background: 'radial-gradient(600px circle at 50% 0%, rgba(6,182,212,0.03), transparent 40%)' }}>
+                  </div>
 
-                  <div className="p-6 md:p-8">
+                  <div className="p-6 md:p-8 flex-1 flex flex-col relative z-10 w-full">
                     {/* Billing Badge */}
-                    <div className="inline-flex items-center gap-2 px-3 py-1 bg-slate-100 rounded-full mb-4">
-                      <span className="text-[10px] md:text-xs font-bold text-slate-700 uppercase tracking-wide">Facturación {plan.billing}</span>
-                      {plan.popular && isAnnual && (
-                        <span className="px-1.5 py-0.5 bg-green-500 text-white text-[10px] md:text-xs font-bold rounded-full">
+                    <div className="inline-flex self-start items-center gap-2 px-3 py-1 bg-slate-50 border border-slate-100 rounded-full mb-5">
+                      <span className="text-[10px] uppercase font-bold text-slate-500 tracking-wider">{isFree ? 'Plan Gratuito' : `Facturación ${plan.billing}`}</span>
+                      {plan.popular && billingCycle === 'anual' && (
+                        <span className="px-1.5 py-0.5 bg-cyan-100 text-cyan-700 text-[10px] font-bold rounded-full">
                           -{savingsPercentage}%
                         </span>
                       )}
@@ -173,73 +172,93 @@ export function Pricing() {
 
                     {/* Icon and Name */}
                     <div className="flex items-center gap-4 mb-3">
-                      <div className={`w-12 h-12 bg-gradient-to-br ${plan.gradient} rounded-2xl flex items-center justify-center shadow-lg`}>
+                      <div className={`w-12 h-12 bg-gradient-to-br ${plan.popular ? 'from-cyan-400 to-blue-600 shadow-md' : plan.gradient} rounded-[14px] flex items-center justify-center border border-white/50 transform group-hover:scale-105 transition-transform duration-300`}>
                         <Icon className="w-6 h-6 text-white" />
                       </div>
                       <div>
-                        <h3 className="text-xl md:text-2xl font-bold text-slate-900">{plan.name}</h3>
+                        <h3 className={`text-xl md:text-2xl font-extrabold tracking-tight ${plan.popular ? 'text-transparent bg-clip-text bg-gradient-to-r from-blue-700 to-cyan-600' : 'text-slate-900'}`}>{plan.name}</h3>
                       </div>
                     </div>
 
-                    <p className="text-sm md:text-base text-slate-600 mb-5 min-h-[3rem]">{plan.description}</p>
+                    <p className="text-sm text-slate-500 mb-6 min-h-[2.5rem] leading-snug">{plan.description}</p>
 
-                    {/* Price */}
-                    <div className="mb-6">
-                      <div className="flex items-end gap-2 mb-2">
-                        <span className="text-5xl font-bold text-slate-900">${price}</span>
-                        <span className="text-xl text-slate-600 mb-2">/mes</span>
+                    {/* Price Section */}
+                    <div className="mb-6 relative">
+                      <div className="flex items-end gap-1.5 mb-1.5">
+                        {price === 0 ? (
+                          <span className="text-4xl lg:text-5xl font-black text-slate-900 tracking-tight">Gratis</span>
+                        ) : (
+                          <>
+                            <span className="text-4xl lg:text-5xl font-black text-slate-900 tracking-tight">${price}</span>
+                            <span className="text-lg text-slate-500 mb-1 font-medium">/mes</span>
+                          </>
+                        )}
+
                       </div>
-                      {isAnnual && savings > 0 && (
-                        <div className="space-y-1">
+                      {isAnnual && savings > 0 && price !== 0 && (
+                        <div className="space-y-1 mt-2">
                           <div className="flex items-center gap-2">
-                            <span className="text-sm text-slate-500 line-through">${plan.monthlyPrice}/mes</span>
-                            <span className="text-sm font-semibold text-green-600">
+                            <span className="text-xs text-slate-400 line-through decoration-slate-300">${plan.monthlyPrice}/mes</span>
+                            <span className="text-[11px] font-bold text-cyan-700 bg-cyan-50 px-2 py-0.5 rounded-full border border-cyan-100">
                               Ahorras ${savings * 12}/año
                             </span>
                           </div>
-                          <p className="text-sm text-slate-500">
-                            Facturado ${price * 12} anualmente • {savingsPercentage}% de descuento
+                          <p className="text-[11px] font-medium text-slate-500">
+                            Facturado ${price * 12} anual • {savingsPercentage}% desc.
                           </p>
                         </div>
                       )}
-                      {!isAnnual && (
-                        <p className="text-sm text-slate-500">
-                          Facturado mensualmente • Sin compromiso a largo plazo
+                      {!isAnnual && price !== 0 && (
+                        <p className="text-[11px] font-medium text-slate-500 mt-1">
+                          Facturado mensual • Sin compromiso
+                        </p>
+                      )}
+                      {price === 0 && (
+                        <p className="text-[11px] font-medium text-slate-500 mt-1">
+                          Acceso básico para evaluar plataforma
                         </p>
                       )}
                     </div>
 
                     {/* CTA Button */}
                     <button
-                      className={`w-full py-4 rounded-xl font-semibold transition-all duration-300 mb-8 hover:-translate-y-0.5 active:translate-y-0 ${plan.popular
-                        ? 'bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white shadow-lg shadow-orange-500/30 hover:shadow-xl hover:shadow-orange-500/40'
-                        : 'bg-slate-900 hover:bg-slate-800 text-white hover:shadow-lg'
+                      className={`w-full py-3 px-4 rounded-xl font-bold text-sm transition-all duration-300 mb-6 hover:-translate-y-0.5 relative overflow-hidden group/btn ${plan.popular
+                        ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-[0_4px_15px_rgba(6,182,212,0.4)] hover:shadow-[0_6px_20px_rgba(6,182,212,0.5)] border border-cyan-400/50'
+                        : 'bg-slate-900 hover:bg-slate-800 text-white shadow-md'
                         }`}
                     >
-                      Comprar Suscripcion
+                      <span className="relative z-10 flex items-center justify-center gap-2">
+                        {isFree ? 'Comenzar Gratis' : 'Comprar Suscripción'}
+                      </span>
+                      {plan.popular && (
+                        <div className="absolute inset-0 bg-[linear-gradient(45deg,transparent_25%,rgba(255,255,255,0.3)_50%,transparent_75%)] bg-[length:250%_250%,100%_100%] bg-no-repeat bg-[position:-100%_0] group-hover/btn:bg-[position:200%_0] transition-[background-position] duration-700 ease-in-out"></div>
+                      )}
                     </button>
 
-                    {/* Features */}
-                    <div className="space-y-4">
-                      <div className="text-sm font-semibold text-slate-900 uppercase tracking-wide">
-                        Qué Incluye:
+                    {/* Features List */}
+                    <div className="space-y-3 mt-auto">
+                      <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest flex items-center gap-3">
+                        Qué Incluye
+                        <div className="flex-1 h-px bg-slate-100"></div>
                       </div>
-                      {plan.features.map((feature, featureIndex) => (
-                        <div key={featureIndex} className="flex items-start gap-3">
-                          {feature.included ? (
-                            <div className="flex-shrink-0 w-5 h-5 bg-gradient-to-br from-green-400 to-emerald-600 rounded-full flex items-center justify-center">
-                              <Check className="w-3 h-3 text-white" strokeWidth={3} />
-                            </div>
-                          ) : (
-                            <div className="flex-shrink-0 w-5 h-5 bg-slate-200 rounded-full flex items-center justify-center">
-                              <X className="w-3 h-3 text-slate-400" strokeWidth={2} />
-                            </div>
-                          )}
-                          <span className={`text-sm ${feature.included ? 'text-slate-700' : 'text-slate-400'}`}>
-                            {feature.name}
-                          </span>
-                        </div>
-                      ))}
+                      <div className="space-y-2.5">
+                        {features.map((feature, featureIndex) => (
+                          <div key={featureIndex} className="flex items-start gap-3 group/feature">
+                            {feature.included ? (
+                              <div className={`flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center mt-0.5 transition-all duration-300 ${plan.popular ? 'bg-cyan-100 text-cyan-600 group-hover/feature:bg-cyan-200' : 'bg-emerald-100 text-emerald-600'}`}>
+                                <Check className="w-3 h-3" strokeWidth={3} />
+                              </div>
+                            ) : (
+                              <div className="flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center mt-0.5 bg-slate-100">
+                                <X className="w-3 h-3 text-slate-400" strokeWidth={2.5} />
+                              </div>
+                            )}
+                            <span className={`text-[13px] md:text-sm leading-snug transition-colors duration-300 ${feature.included ? 'text-slate-700 font-medium' : 'text-slate-400 font-normal grayscale opacity-70'}`}>
+                              {feature.name}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -253,10 +272,6 @@ export function Pricing() {
           <div className="flex flex-wrap justify-center gap-8 text-sm text-white">
             <div className="flex items-center gap-2">
               <Check className="w-5 h-5 text-cyan-300" />
-              <span>Prueba gratuita de 14 días en todos los planes</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Check className="w-5 h-5 text-cyan-300" />
               <span>Cancela en cualquier momento, sin preguntas</span>
             </div>
             <div className="flex items-center gap-2">
@@ -267,15 +282,6 @@ export function Pricing() {
               <Check className="w-5 h-5 text-cyan-300" />
               <span>Cumplimiento HIPAA garantizado</span>
             </div>
-          </div>
-
-          <div className="pt-8">
-            <p className="text-white mb-4">
-              ¿Necesitas una solución empresarial personalizada con infraestructura dedicada?
-            </p>
-            <button className="px-8 py-3 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white border-2 border-white/30 hover:border-white/50 rounded-xl font-semibold hover:-translate-y-1 active:translate-y-0 transition-all duration-300">
-              Contactar Ventas Empresariales
-            </button>
           </div>
         </div>
       </div>

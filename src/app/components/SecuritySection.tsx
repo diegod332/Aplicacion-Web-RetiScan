@@ -1,4 +1,4 @@
-import { Shield, Lock, Database, FileCheck, AlertTriangle, CheckCircle2 } from 'lucide-react';
+import { Shield, Lock, Database, FileCheck, CheckCircle2 } from 'lucide-react';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 import { SplitText } from '@/app/components/SplitText';
 import { GlowCard } from '@/app/components/GlowCard';
@@ -6,31 +6,31 @@ import { GlowCard } from '@/app/components/GlowCard';
 const securityFeatures = [
   {
     icon: Shield,
-    title: 'Seguridad por Diseño',
-    description: 'Nuestra arquitectura ha sido rigurosamente validada mediante modelado de amenazas para prevenir vectores de ataque comunes incluyendo inyección SQL, XSS y ataques CSRF.'
+    title: 'Privacidad Total del Paciente',
+    description: 'Toda la información médica está blindada bajo los más altos estándares éticos y legales, asegurando que solo tú y tu equipo autorizado tengan acceso.'
   },
   {
     icon: Lock,
-    title: 'Cifrado End-to-End',
-    description: 'Todos los datos de expedientes clínicos están cifrados en tránsito usando TLS 1.3 y en reposo con cifrado AES-256. Las claves de cifrado se gestionan mediante módulos de seguridad hardware (HSM).'
+    title: 'Bóveda de Datos Inviolable',
+    description: 'Implementamos tecnología de protección avanzada para que los expedientes de tus pacientes estén tan seguros como en una caja fuerte digital de grado bancario.'
   },
   {
     icon: Database,
-    title: 'Protección de Integridad de Datos',
-    description: 'Mecanismos avanzados de detección de manipulación garantizan la integridad de los datos biométricos del paciente. Todas las transacciones usan checksums criptográficos y logs de auditoría inmutables.'
+    title: 'Custodia Profesional de Datos',
+    description: 'Vigilamos permanentemente la integridad de la información clínica, garantizando que los datos nunca sean alterados ni se pierdan en el tiempo.'
   },
   {
     icon: FileCheck,
-    title: 'Cumplimiento HIPAA y SOC 2',
-    description: 'Certificado conforme a estándares HIPAA, HITECH y SOC 2 Type II. Auditorías de seguridad regulares y pruebas de penetración de terceros garantizan el cumplimiento continuo.'
+    title: 'Tranquilidad Legal y Normativa',
+    description: 'Olvídate de las preocupaciones regulatorias. RetiScan cumple plenamente con las normativas internacionales de protección de datos de salud (HIPAA) para tu respaldo.'
   }
 ];
 
 const complianceBadges = [
-  { name: 'HIPAA', status: 'Conforme' },
-  { name: 'SOC 2 Type II', status: 'Certificado' },
-  { name: 'GDPR', status: 'Listo' },
-  { name: 'ISO 27001', status: 'Certificado' }
+  { name: 'HIPAA', status: 'Certificado' },
+  { name: 'GDPR / NOM', status: 'Cumplimiento' },
+  { name: 'DATOS PHI', status: 'Protegido' },
+  { name: 'SEGURIDAD', status: 'Grado Médico' }
 ];
 
 export function SecuritySection() {
@@ -40,7 +40,7 @@ export function SecuritySection() {
   const c2 = useScrollReveal('fade-up', { delay: 400 });
   const c3 = useScrollReveal('fade-up', { delay: 550 });
   const cardReveals = [c0, c1, c2, c3];
-  const threat = useScrollReveal('zoom-in', { delay: 200 });
+  const promise = useScrollReveal('zoom-in', { delay: 200 });
   const badges = useScrollReveal('fade-up', { delay: 300 });
 
   return (
@@ -58,14 +58,13 @@ export function SecuritySection() {
         <div ref={title.ref} style={title.style} className="text-center max-w-3xl mx-auto mb-10 lg:mb-12">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-blue-50 border border-blue-200 rounded-full mb-4">
             <Shield className="w-4 h-4 text-blue-700" />
-            <span className="text-xs font-semibold text-blue-700">SEGURIDAD Y CONFIANZA</span>
+            <span className="text-xs font-semibold text-blue-700">CONFIANZA PROFESIONAL</span>
           </div>
           <SplitText as="h2" className="text-3xl lg:text-4xl font-bold text-slate-900 mb-4">
-            Seguridad de Nivel Empresarial para Datos Biométricos
+            Tu Ética Médica, Respaldada por Nuestra Tecnología
           </SplitText>
           <p className="text-lg text-slate-700">
-            Proteger la información sensible de salud del paciente es nuestra máxima prioridad.
-            RetiScan emplea protocolos de seguridad de grado militar y sigue los marcos de ciberseguridad NIST.
+            En RetiScan, proteger la salud y privacidad del paciente no es solo una función técnica, es nuestro compromiso fundamental con tu práctica clínica.
           </p>
         </div>
 
@@ -94,31 +93,32 @@ export function SecuritySection() {
           })}
         </div>
 
-        {/* Threat Modeling Highlight */}
-        <div ref={threat.ref} style={threat.style} className="bg-gradient-to-br from-orange-50 to-red-50 border border-orange-200 rounded-2xl p-6 md:p-8 mb-12 hover:shadow-xl transition-shadow duration-300">
-          <div className="flex flex-col md:flex-row items-start gap-6">
+        {/* Commitment Highlight - Human Centered */}
+        <div ref={promise.ref} style={promise.style} className="bg-gradient-to-br from-blue-600 to-indigo-700 rounded-2xl p-6 md:p-8 mb-12 shadow-xl relative overflow-hidden">
+          {/* Subtle decor */}
+          <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl"></div>
+          
+          <div className="flex flex-col md:flex-row items-center gap-8 relative z-10">
             <div className="flex-shrink-0">
-              <div className="w-14 h-14 bg-gradient-to-br from-orange-500 to-red-600 rounded-2xl flex items-center justify-center shadow-lg">
-                <AlertTriangle className="w-7 h-7 text-white" />
+              <div className="w-16 h-16 bg-white/10 backdrop-blur-md rounded-2xl flex items-center justify-center border border-white/20 shadow-2xl">
+                <CheckCircle2 className="w-8 h-8 text-white" strokeWidth={2.5}/>
               </div>
             </div>
-            <div className="flex-1">
-              <h3 className="text-xl font-bold text-slate-900 mb-3">Modelado Integral de Amenazas</h3>
-              <p className="text-sm text-slate-700 leading-relaxed mb-4">
-                Nuestra plataforma se somete a modelado de amenazas continuo utilizando la metodología STRIDE
-                (Spoofing, Tampering, Repudiation, Information Disclosure, Denial of Service,
-                Elevation of Privilege). Cada componente ha sido analizado para detectar vulnerabilidades:
+            <div className="flex-1 text-center md:text-left text-white">
+              <h3 className="text-xl md:text-2xl font-bold mb-3">Nuestro Compromiso de Confidencialidad</h3>
+              <p className="text-sm md:text-base text-blue-50/90 leading-relaxed max-w-3xl">
+                Sabemos que la confianza paciente-médico es sagrada. Por eso, RetiScan ha sido construido sobre una base de ciberseguridad preventiva que garantiza que tú siempre seas el dueño absoluto de los datos clínicos.
               </p>
-              <div className="grid md:grid-cols-2 gap-3 lg:gap-4">
+              <div className="flex flex-wrap gap-4 mt-6 justify-center md:justify-start">
                 {[
-                  'Prevención de Inyección SQL vía Consultas Parametrizadas',
-                  'Validación y Sanitización de Entradas en Todos los Puntos',
-                  'Control de Acceso Basado en Roles (RBAC)',
-                  'Verificaciones Criptográficas de Integridad en Todos los Datos'
+                  'Búsqueda permanente de vulnerabilidades',
+                  'Auditorías de seguridad trimestrales',
+                  'Protección activa contra intrusiones',
+                  'Firma digital de expedientes'
                 ].map((item, i) => (
-                  <div key={i} className="flex items-center gap-3 bg-white rounded-lg p-2.5 shadow-sm border border-slate-100 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300">
-                    <CheckCircle2 className="w-4 h-4 text-green-600 flex-shrink-0" />
-                    <span className="text-xs sm:text-sm text-slate-800">{item}</span>
+                  <div key={i} className="flex items-center gap-2 px-3 py-1.5 bg-white/10 rounded-full text-xs font-semibold backdrop-blur-sm border border-white/10">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-white" />
+                    {item}
                   </div>
                 ))}
               </div>
@@ -128,28 +128,32 @@ export function SecuritySection() {
 
         {/* Compliance Badges */}
         <div ref={badges.ref} style={badges.style} className="text-center">
-          <h3 className="text-xl lg:text-2xl font-bold text-slate-900 mb-6">Certificado y Auditado</h3>
+          <h3 className="text-xl lg:text-2xl font-bold text-slate-900 mb-6 font-primary">Respaldado por Estándares Internacionales</h3>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
             {complianceBadges.map((badge, index) => (
-              <div key={index} className="bg-white rounded-2xl p-4 lg:p-6 border border-slate-200 shadow-lg hover:shadow-xl hover:-translate-y-2 hover:border-green-300 transition-all duration-500 group cursor-default">
-                <div className="w-10 h-10 bg-gradient-to-br from-green-400 to-emerald-600 rounded-full flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform duration-300">
-                  <CheckCircle2 className="w-5 h-5 text-white" />
+              <div key={index} className="bg-white rounded-2xl p-4 lg:p-6 border border-slate-200 shadow-lg hover:shadow-xl hover:-translate-y-2 hover:border-cyan-300 transition-all duration-500 group cursor-default">
+                <div className="w-10 h-10 bg-gradient-to-br from-cyan-400 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-3 shadow-md group-hover:scale-110 transition-transform duration-300">
+                  <IconCheck badge={badge.name} />
                 </div>
-                <div className="font-bold text-base lg:text-lg text-slate-900 mb-0.5">{badge.name}</div>
-                <div className="text-xs text-green-600 font-medium">{badge.status}</div>
+                <div className="font-bold text-sm lg:text-base text-slate-900 mb-0.5">{badge.name}</div>
+                <div className="text-[10px] text-blue-600 font-bold tracking-widest uppercase">{badge.status}</div>
               </div>
             ))}
           </div>
         </div>
-
         {/* Bottom Note */}
         <div className="mt-8 lg:mt-12 text-center">
           <p className="text-slate-600 text-sm max-w-3xl mx-auto">
             Todas las medidas de seguridad son verificadas independientemente mediante pruebas de penetración trimestrales
-            por hackers éticos certificados y auditorías de seguridad anuales por firmas líderes en ciberseguridad.
+            por expertos certificados y auditorías de seguridad anuales por firmas líderes en ciberseguridad.
           </p>
         </div>
       </div>
     </section>
   );
+}
+
+function IconCheck({ badge }: { badge: string }) {
+  if (badge === 'HIPAA') return <Lock className="w-5 h-5 text-white" />;
+  return <CheckCircle2 className="w-5 h-5 text-white" />;
 }

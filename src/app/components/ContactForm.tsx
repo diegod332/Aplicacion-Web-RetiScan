@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Mail, Phone, MapPin, Send, Building, Users } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, Building, Users, ChevronDown } from 'lucide-react';
 import { SplitText } from '@/app/components/SplitText';
 import { MagneticButton } from '@/app/components/MagneticButton';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
@@ -97,40 +97,40 @@ export function ContactForm() {
 
                     {/* Right Content: The Form */}
                     <div ref={rightContent.ref} style={rightContent.style}>
-                        <div className="bg-[#002868]/40 backdrop-blur-3xl border border-white/20 rounded-3xl p-8 lg:p-10 shadow-2xl relative overflow-hidden">
+                        <div className="bg-[#FFFFFF] backdrop-blur-3xl border border-black/20 rounded-3xl p-8 lg:p-10 shadow-2xl relative overflow-hidden">
                             {/* Decorative inner glow */}
-                            <div className="absolute top-0 right-0 w-64 h-64 bg-cyan-400/20 rounded-full blur-3xl -z-10"></div>
+                            <div className="absolute top-0 right-0 w-64 h-64 bg-white/20 rounded-full blur-3xl -z-10"></div>
 
-                            <h3 className="text-2xl font-bold text-white mb-8">Solicitud de Información</h3>
+                            <h3 className="text-2xl font-bold text-black/90 mb-8">Solicitud de Información</h3>
 
                             <form onSubmit={handleSubmit} className="space-y-6">
                                 <div className="grid sm:grid-cols-2 gap-6">
                                     {/* Name */}
                                     <div className="space-y-2">
-                                        <label className="text-sm font-medium text-white/90">Nombre Completo</label>
+                                        <label className="text-sm font-medium text-black/90">Nombre Completo</label>
                                         <input
                                             type="text"
                                             required
                                             placeholder="Dr. Juan Pérez"
-                                            className="w-full bg-white border border-white/20 rounded-xl px-4 py-3 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all font-medium"
+                                            className="w-full bg-white border border-black/20 rounded-xl px-4 py-3 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all font-medium"
                                         />
                                     </div>
 
                                     {/* Email */}
                                     <div className="space-y-2">
-                                        <label className="text-sm font-medium text-white/90">Correo Profesional</label>
+                                        <label className="text-sm font-medium text-black/90">Correo Profesional</label>
                                         <input
                                             type="email"
                                             required
                                             placeholder="juan.perez@clinica.com"
-                                            className="w-full bg-white border border-white/20 rounded-xl px-4 py-3 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all font-medium"
+                                            className="w-full bg-white border border-black/20 rounded-xl px-4 py-3 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all font-medium"
                                         />
                                     </div>
                                 </div>
 
                                 {/* Clinic / Organization */}
                                 <div className="space-y-2">
-                                    <label className="text-sm font-medium text-white/90">Institución o Clínica</label>
+                                    <label className="text-sm font-medium text-black/90">Institución o Clínica</label>
                                     <div className="relative">
                                         <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                                             <Building className="h-5 w-5 text-slate-400" />
@@ -139,7 +139,7 @@ export function ContactForm() {
                                             type="text"
                                             required
                                             placeholder="Hospital de la Luz..."
-                                            className="w-full bg-white border border-white/20 rounded-xl pl-11 pr-4 py-3 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all font-medium"
+                                            className="w-full bg-white border border-black/20 rounded-xl pl-11 pr-4 py-3 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all font-medium"
                                         />
                                     </div>
                                 </div>
@@ -147,29 +147,37 @@ export function ContactForm() {
                                 <div className="grid sm:grid-cols-2 gap-6">
                                     {/* Volume (B2B Qualification) */}
                                     <div className="space-y-2">
-                                        <label className="text-sm font-medium text-white/90">Volumen Anual Promedio</label>
+                                        <label className="text-sm font-medium text-black/90">Volumen Anual Promedio</label>
                                         <div className="relative">
                                             <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                                                 <Users className="h-5 w-5 text-slate-400" />
                                             </div>
-                                            <select required className="w-full bg-white border border-white/20 rounded-xl pl-11 pr-4 py-3 text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all appearance-none [&>option]:text-slate-900 border-r-[16px] border-transparent font-medium">
+                                            <select required className="w-full bg-white border border-black/20 rounded-xl pl-11 pr-10 py-3 text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all appearance-none [&>option]:text-slate-900 font-medium cursor-pointer">
                                                 <option value="" disabled selected>Selecciona...</option>
                                                 <option value="low">1 - 500 pacientes</option>
                                                 <option value="medium">501 - 2,000 pacientes</option>
                                                 <option value="high">Más de 2,000 pacientes</option>
                                             </select>
+                                            <div className="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none">
+                                                <ChevronDown className="h-4 w-4 text-slate-400" />
+                                            </div>
                                         </div>
                                     </div>
 
                                     {/* Interest */}
                                     <div className="space-y-2">
                                         <label className="text-sm font-medium text-white/90">¿Qué te interesa?</label>
-                                        <select required className="w-full bg-white border border-white/20 rounded-xl px-4 py-3 text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all appearance-none [&>option]:text-slate-900 border-r-[16px] border-transparent font-medium">
-                                            <option value="" disabled selected>Selecciona...</option>
-                                            <option value="info">Más información</option>
-                                            <option value="plan_specialist">Contratar Plan Especialista</option>
-                                            <option value="plan_clinic">Contratar Plan Clínica/Enterprise</option>
-                                        </select>
+                                        <div className="relative">
+                                            <select required className="w-full bg-white border border-black/20 rounded-xl px-4 pr-10 py-3 text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all appearance-none [&>option]:text-slate-900 font-medium cursor-pointer">
+                                                <option value="" disabled selected>Selecciona...</option>
+                                                <option value="info">Más información</option>
+                                                <option value="plan_specialist">Contratar Plan Especialista</option>
+                                                <option value="plan_clinic">Contratar Plan Clínica/Enterprise</option>
+                                            </select>
+                                            <div className="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none">
+                                                <ChevronDown className="h-4 w-4 text-slate-400" />
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -179,7 +187,7 @@ export function ContactForm() {
                                     <textarea
                                         rows={3}
                                         placeholder="Cuéntanos más sobre tus necesidades actuales..."
-                                        className="w-full bg-white border border-white/20 rounded-xl px-4 py-3 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all resize-none font-medium"
+                                        className="w-full bg-white border border-black/20 rounded-xl px-4 py-3 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all resize-none font-medium"
                                     ></textarea>
                                 </div>
 
