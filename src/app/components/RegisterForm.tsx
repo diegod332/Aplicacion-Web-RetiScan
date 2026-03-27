@@ -115,7 +115,11 @@ export function RegisterForm({ onBack, planName = 'Especialista' }: RegisterForm
                                 <div className="relative">
                                     <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
                                     <input
-                                        type="text" required name="firstName" value={formData.firstName} onChange={handleChange}
+                                        type="text" required name="firstName" value={formData.firstName}
+                                        onChange={(e) => {
+                                            const val = e.target.value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ\s]/g, '');
+                                            setFormData({ ...formData, firstName: val });
+                                        }}
                                         maxLength={100}
                                         className="w-full pl-12 pr-4 py-3 bg-white border border-slate-200 rounded-xl text-slate-900 placeholder:text-slate-400 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all shadow-sm"
                                         placeholder="Ej. Juan"
@@ -125,7 +129,11 @@ export function RegisterForm({ onBack, planName = 'Especialista' }: RegisterForm
                             <div className="space-y-2">
                                 <label className="text-sm font-semibold text-slate-700 ml-1">Apellido Paterno</label>
                                 <input
-                                    type="text" required name="paternalSurname" value={formData.paternalSurname} onChange={handleChange}
+                                    type="text" required name="paternalSurname" value={formData.paternalSurname}
+                                    onChange={(e) => {
+                                        const val = e.target.value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ\s]/g, '');
+                                        setFormData({ ...formData, paternalSurname: val });
+                                    }}
                                     maxLength={100}
                                     className="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl text-slate-900 placeholder:text-slate-400 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all shadow-sm"
                                     placeholder="Ej. Pérez"
@@ -137,7 +145,11 @@ export function RegisterForm({ onBack, planName = 'Especialista' }: RegisterForm
                             <div className="space-y-2">
                                 <label className="text-sm font-semibold text-slate-700 ml-1">Apellido Materno (Opcional)</label>
                                 <input
-                                    type="text" name="maternalSurname" value={formData.maternalSurname} onChange={handleChange}
+                                    type="text" name="maternalSurname" value={formData.maternalSurname}
+                                    onChange={(e) => {
+                                        const val = e.target.value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ\s]/g, '');
+                                        setFormData({ ...formData, maternalSurname: val });
+                                    }}
                                     maxLength={100}
                                     className="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl text-slate-900 placeholder:text-slate-400 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all shadow-sm"
                                 />
